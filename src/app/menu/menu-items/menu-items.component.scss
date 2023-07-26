@@ -1,0 +1,44 @@
+.ion-text-margin-start {
+  margin-left: 10px;
+}
+
+.checkbox-icon path {
+  stroke: #fff;
+}
+
+.checkbox-checked .checkbox-icon {
+  border-color: orange;
+  color: white;
+}
+
+.checkbox-checked .checkbox-icon path {
+  stroke: white;
+}
+
+ion-thumbnail {
+  --border-radius: 14px;
+  min-width: 100px;
+  min-height: 100px;
+}
+
+.addButton {
+  position: relative;
+  min-height: 33px;
+  width: 90px;
+  bottom: 30px;
+  border: 1px solid black; 
+  background-color: white;
+}
+
+.removeButton {
+  position: relative;
+  min-height: 33px;
+  width: 90px;
+  bottom: 30px;
+  border: 1px solid red; 
+  background-color: white;
+}
+
+.padding-bottom-10 {
+  padding-bottom: 10px;
+}

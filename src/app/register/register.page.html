@@ -1,0 +1,29 @@
+<ion-content [fullscreen]="true" class="ion-padding ion-margin-top">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-md="4">
+        <form [formGroup]="form" (ngSubmit)="register()">
+          <ion-item lines="full">
+            <ion-input type="text" label="First Name" label-placement="floating"  required formControlName="firstName"></ion-input>
+          </ion-item>
+          <ion-item lines="full">
+            <ion-input type="text" label="Last Name" label-placement="floating" required formControlName="lastName"></ion-input>
+          </ion-item>
+          <ion-item lines="full">
+            <ion-input type="text" label="Email" label-placement="floating" required formControlName="email"></ion-input>
+          </ion-item>
+          <ion-item lines="full">
+            <ion-input type="numeric" label="Mobile" label-placement="floating" required formControlName="mobile"></ion-input>
+          </ion-item>
+          <ion-row>
+            <ion-col>
+              <ion-button type="submit" color="primary" expand="block" class="ion-margin-bottom" [disabled]="form.invalid">
+                Sign Up
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

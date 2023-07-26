@@ -1,0 +1,30 @@
+<ion-content [fullscreen]="true">
+  <ion-grid class="ion-padding-vertical" *ngIf="!isLoading">
+    <ion-row>
+      <ion-col size="12">
+        <app-address-list [showSpinner]="false" (onAddressChange)="setAddress($event)"></app-address-list>
+      </ion-col>
+      <ion-col>
+        <app-cart [items]="items"></app-cart>
+        <ion-grid>
+          <ion-row class="ion-justify-content-center ion-margin-horizontal">
+            <ion-col size="12">
+              <ion-text>Available coupons 16.</ion-text>
+              <ion-checkbox labelPlacement="end" class="checkbox-tiffy ion-float-end">
+                Avail coupon
+              </ion-checkbox>
+            </ion-col>
+            <ion-col size="12" size-md="6" class="ion-align-items-center">
+              <ion-button expand="block" color="primary" class="ion-margin" [routerLink]="['../', 'checkout']">
+                Proceed to pay
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-spinner color="primary" *ngIf="isLoading" mode="ios"></ion-spinner>
+
+</ion-content>

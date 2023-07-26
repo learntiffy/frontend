@@ -1,0 +1,37 @@
+.picker {
+  width: 30rem;
+  max-width: 80%;
+  height: 15rem;
+  max-height: 20vh;
+  border: 1px solid var(--ion-color-primary);
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+}
+
+.img-selector-button {
+  width: 30rem;
+  height: 15rem;
+  max-height: 20vh;
+  color: var(--primary-color);
+  --ion-color-base: white !important;
+  font-size: x-large;
+
+  + button {
+    border-radius: 5%;
+    border: 1px solid var(--primary-color);
+  }
+
+  // &:hover {
+  //   --ion-color-contrast: orange !important
+  // }
+
+}
+
+ion-img {
+  border-radius: 200px;
+  height: 200px;
+  width: 200px;
+}

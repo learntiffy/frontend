@@ -1,0 +1,27 @@
+<ion-card>
+  <ion-card-header class="ion-align-items-center">
+    <ion-card-title> Items in cart </ion-card-title>
+  </ion-card-header>
+  <ion-card-content class="ion-no-padding">
+    <ion-list [inset]="true">
+      <ion-item *ngFor="let item of items" class="marginBottom_25">
+        <ion-avatar slot="start">
+          <img alt="Item Image" [src]="item.imageURL"/>
+        </ion-avatar>
+        <ion-label>{{ item.name }}</ion-label>
+        <ion-text class="ion-float-end">&#8377; {{item.price}}</ion-text>
+      </ion-item>
+      <br>
+      <ion-item>
+        <ion-label>
+          <ion-text color="primary">
+            <h1 class="ion-float-start font-primary">Total</h1>
+          </ion-text>
+          <ion-text class="ion-float-end font-primary">
+            <h1>&#8377; {{total}}</h1>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>

@@ -1,0 +1,33 @@
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" class="d-flex justify-content-end ion-padding-end">
+        <ion-button color="primary">Post</ion-button>
+      </ion-col>
+      <ion-col size="12">
+        <ion-card *ngFor="let item of [1, 2, 3, 4, 5, 6, 7]">
+          <ion-card-header>
+            <ion-card-title> Harshil Amreliya </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-grid class="ion-no-padding">
+              <ion-row>
+                <ion-col size="12">
+                  Here's a small text description for the card content. Nothing more, nothing less.
+                  Here's a small text description for the card content. Nothing more, nothing less.
+                </ion-col>
+                <ion-col size="12" class="ion-align-items-baseline">
+                  <img src="https://ionicframework.com/docs/img/demos/card-media.png" alt="img" class="img" />
+                  <img src="https://ionicframework.com/docs/img/demos/card-media.png" alt="img" class="img" />
+                  <img src="https://ionicframework.com/docs/img/demos/card-media.png" alt="img" class="img" />
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <app-add-post></app-add-post>
+</ion-content>

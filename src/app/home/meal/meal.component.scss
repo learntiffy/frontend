@@ -1,0 +1,21 @@
+ion-card-title.meal-title + p {
+  font-size: 50px;
+}
+
+ion-text.meal-price {
+  font-size: 40px;
+  color: var(--primary-color);
+}
+
+.banner {
+  position: fixed;
+  top: 27px;
+  right: -42px;
+  transform: rotate(45deg);
+  width: 160px;
+  height: 31px;
+  margin-left: 35px;
+  color: white;
+  line-height: 2;
+  font-size: 14px;
+}

@@ -1,0 +1,21 @@
+<ion-grid *ngIf="!isLoading && items.length > 0">
+  <ion-row>
+    <ion-item lines="none">
+      <ion-label>
+        <h2>
+          <b> {{ section }} </b>
+        </h2>
+      </ion-label>
+    </ion-item>
+  </ion-row>
+
+  <hr />
+
+  <ion-row class="d-flex justify-content-center">
+    <ion-col size="6" size-xs="12" size-sm="10">
+      <div *ngFor="let item of items">
+        <app-menu-items [item]="item" [added]="checkIfItemAdded(item)" (onItemAdded)="addItem($event)"></app-menu-items>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "487178472574",
+    "project_id": "tiffy-bb843",
+    "storage_bucket": "tiffy-bb843.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:487178472574:android:fa8102a7f2653b2a435c2f",
+        "android_client_info": {
+          "package_name": "com.tiffy.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "487178472574-08nsrbcrsuqbudc3t2la5khp10fruurh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-NKLqKv0oU_2iWxaFAi_VHuoPvPBy7Ro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "487178472574-08nsrbcrsuqbudc3t2la5khp10fruurh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

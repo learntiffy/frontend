@@ -1,0 +1,95 @@
+<ion-grid *ngIf="!isLoading">
+  <ion-row *ngIf="addressList?.length === 0">
+    <ion-col class="ion-margin">
+      <ion-text color="danger" class="d-flex justify-content-evenly">
+        Please enter at least one address in order to book a tiffin.
+      </ion-text>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col
+      size="12"
+      size-sm="12"
+      size-md="6"
+      size-lg="4"
+      size-xl="3"
+      *ngFor="let address of addressList"
+    >
+      <ion-label>
+        <input
+          class="card-input-element"
+          type="radio"
+          name="product"
+          [value]="address"
+          [(ngModel)]="defaultAddress"
+        />
+
+        <ion-card (click)="selectAddress(address)">
+          <ion-card-header>
+            <ion-card-title>
+              <ion-icon
+                name="trash-bin-outline"
+                class="ion-float-right"
+                color="danger"
+                role="button"
+                aria-hidden="true"
+                (click)="showConfirm()"
+              >
+                <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+              </ion-icon>
+
+              <ion-text color="dark">
+                <h2>{{ address.type }}</h2>
+              </ion-text>
+            </ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-text color="dark">
+              {{ address.homeNo }}, {{ address.society }},
+              <br />
+              {{ address.landmark }},
+              <br />
+              {{ address.subArea.name }}, {{ address.subArea.area.name }} -
+              {{ address.subArea.area.pincode }}
+            </ion-text>
+
+            <ion-button
+              type="button"
+              expand="block"
+              fill="outline"
+              class="ion-margin-top btn-outline"
+              id="open-custom-dialog"
+              (click)="openEditModal(address._id)"
+            >
+              Edit
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-label>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="10" size-md="6" class="ion-align-items-center">
+      <ion-button
+        expand="block"
+        color="primary"
+        class="ion-margin"
+        (click)="openEditModal()"
+      >
+        ADD NEW ADDRESS
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ion-spinner color="primary" *ngIf="isLoading && showSpinner"></ion-spinner>
+
+<app-edit-address
+  (close)="onAddressSave($event)"
+  [isModalOpen]="showEditAddress"
+  [addressId]="addressId"
+  *ngIf="showEditAddress"
+></app-edit-address>

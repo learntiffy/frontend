@@ -1,0 +1,58 @@
+<ion-card color="light">
+  <ion-card-content class="ion-no-padding">
+    <ion-list>
+      <ion-item lines="none">
+        <ion-thumbnail slot="end">
+          <img
+            alt="Silhouette of mountains"
+            [src]="item?.imageURL"
+          />
+          <ion-chip
+            color="light"
+            class="d-flex justify-content-center"
+            [ngClass]="{addButton: !added, removeButton: added}"
+            (click)="onItemAddRemove(item)"
+          >
+            <ion-label color="dark" *ngIf="!added">
+              Add
+            </ion-label>
+            <ion-label color="danger" *ngIf="added">
+              Remove
+            </ion-label>
+            <div class="ion-activatable ripple-parent rounded-rectangle">
+              <ion-ripple-effect></ion-ripple-effect>
+            </div>
+          </ion-chip>
+        </ion-thumbnail>
+        <ion-label>
+          <ion-row>
+            <ion-col size="6" size-sm="6" class="ion-no-padding">
+              <ion-row>
+                <h2 class="padding-bottom-10 ion-text-wrap">
+                  <b>{{item?.name}}</b>
+                </h2>
+              </ion-row>
+              <ion-row>
+                <h3 class="padding-bottom-10">&#x20B9; {{item?.price}}  - {{item?.unit}}</h3>
+              </ion-row>
+            </ion-col>
+            <ion-col size="4" size-sm="1"></ion-col>
+            <ion-col size="2" size-sm="5"></ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-row class="ion-text-wrap">
+              <ion-text color="medium">
+                <h5>
+                  {{item?.description}}
+                </h5>
+              </ion-text>
+            </ion-row>
+          </ion-row>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>
+
+
+<!-- src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/ee5f8e06b300efc07c9fe3f4df40dfc4" -->

@@ -1,0 +1,71 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-grid *ngIf="!isLoading">
+    <ion-row class="ion-justify-content-center ion-margin-horizontal">
+      <ion-col size-sm="12" size="12" size-md="10">
+        <ion-segment [value]="Meal.LUNCH" mode="ios" (ionChange)="changeMeal($event)">
+          <ion-segment-button [value]="Meal.LUNCH">
+            <ion-label>Lunch</ion-label>
+          </ion-segment-button>
+          <ion-segment-button [value]="Meal.DINNER">
+            <ion-label>Dinner</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center">
+      <ion-col size-xs="2" size-sm="2" size-md="2" class="d-flex justify-content-end">
+        <ion-text class="ion-text-margin-end">Day</ion-text>
+      </ion-col>
+
+      <ion-col size-xs="5" size-sm="5" size-md="4"></ion-col>
+
+      <ion-col size-xs="3" size-sm="3" size-md="4" class="d-flex justify-content-start">
+        <ion-row class="ion-justify-content-end ion-padding-end">
+          <ion-radio-group [allowEmptySelection]="false" [value]="selectedDay" class="ion-hide-sm-down ion-margin-end"
+            (ionChange)="changeDay($event)">
+            <ion-radio value="TODAY" labelPlacement="end" class="ion-margin-end">
+              Today
+            </ion-radio>
+            <ion-radio value="TOMO" labelPlacement="end"> Tomorrow </ion-radio>
+          </ion-radio-group>
+
+          <ion-radio-group [allowEmptySelection]="false" [value]="selectedDay" mode="ios" class="ion-hide-sm-up"
+            (ionChange)="changeDay($event)">
+            <ion-radio value="TODAY" justify="space-between" labelPlacement="start" class="ion-margin-end">
+              Today
+            </ion-radio>
+            <ion-radio value="TOMO" class="ion-float-end" justify="space-between" labelPlacement="start">
+              Tomorrow
+            </ion-radio>
+          </ion-radio-group>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <app-menu-section [section]="'SABJI'" [items]="getItemsByType('SABJI')" [isLoading]="isLoading"
+      [menuChangedSubject]="menuChangedSubject.asObservable()"></app-menu-section>
+
+    <app-menu-section [section]="'ROTI'" [items]="getItemsByType('ROTI')" [isLoading]="isLoading"
+      [menuChangedSubject]="menuChangedSubject.asObservable()"></app-menu-section>
+
+    <app-menu-section [section]="'DAL'" [items]="getItemsByType('DAL')" [isLoading]="isLoading"
+      [menuChangedSubject]="menuChangedSubject.asObservable()"></app-menu-section>
+
+    <app-menu-section [section]="'RICE'" [items]="getItemsByType('RICE')" [isLoading]="isLoading"
+      [menuChangedSubject]="menuChangedSubject.asObservable()"></app-menu-section>
+
+    <app-menu-section [section]="'SPECIAL'" [items]="getItemsByType('SPECIAL')" [isLoading]="isLoading"
+      [menuChangedSubject]="menuChangedSubject.asObservable()"></app-menu-section>
+
+    <ion-row class="ion-justify-content-center ion-margin-horizontal">
+      <ion-col size="12" size-md="6" class="ion-align-items-center">
+        <ion-button expand="block" color="primary" class="ion-margin" (click)="proceedToCheckout()">
+          Proceed
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-spinner color="primary" *ngIf="isLoading" mode="ios"></ion-spinner>
+</ion-content>

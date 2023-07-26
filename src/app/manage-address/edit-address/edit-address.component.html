@@ -1,0 +1,84 @@
+<ion-content class="ion-padding">
+  <ion-modal #modal [isOpen]="isModalOpen" [canDismiss]="true" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-content>
+        <ion-toolbar>
+          <ion-title>
+            <ion-text color="dark">
+              <h2>{{isEdit ? 'Edit Address' : 'Add Address'}}</h2>
+            </ion-text>
+          </ion-title>
+          <ion-buttons mode="md" slot="end">
+            <ion-button (click)="closeModal()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+        <div class="wrapper">
+          <ion-grid>
+            <ion-row class="ion-justify-content-center">
+              <ion-col>
+                <form [formGroup]="form" (ngSubmit)="saveAddress()">
+                  <ion-item class="item">
+                    <ion-input label="Home No" label-placement="floating" placeholder="e.g. A-202" id="homeNo"
+                      name="homeNo" autocomplete="address-line1" errorText="Home no is required"
+                      formControlName="homeNo"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-input label="Society" label-placement="floating" placeholder="Please enter society name"
+                      id="society" name="society" autocomplete="address-line2" errorText="Society name is required"
+                      required="true" formControlName="society"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-input label="Landmark" label-placement="floating" placeholder="Please enter landmark"
+                      id="landmark" name="landmark" autocomplete="address-line3" errorText="Landmark is required"
+                      required="true" formControlName="landmark"></ion-input>
+                  </ion-item>
+                  <ion-item *ngIf="areaList">
+                    <ion-select label="Area" placeholder="Select area" class="no-select" id="area" name="area"
+                      required="true" formControlName="area" (ionChange)="getSubArea()">
+                      <ion-select-option [value]="area._id" *ngFor="let area of areaList">
+                        {{ area.name }}
+                      </ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                  <ion-item *ngIf="subAreaList">
+                    <ion-select label="Sub area" placeholder="Select sub area" class="no-select" id="area" name="area"
+                      required="true" formControlName="subArea">
+                      <ion-select-option [value]="subArea._id" *ngFor="let subArea of subAreaList">
+                        {{ subArea.name }}
+                      </ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col size="12">
+                        <ion-segment [value]="form.type" mode="ios" formControlName="type">
+                          <ion-segment-button [value]="AddressType.HOME">
+                            <ion-label>Home</ion-label>
+                          </ion-segment-button>
+                          <ion-segment-button [value]="AddressType.WORK">
+                            <ion-label>Work</ion-label>
+                          </ion-segment-button>
+                          <ion-segment-button [value]="AddressType.OTHER">
+                            <ion-label>Other</ion-label>
+                          </ion-segment-button>
+                        </ion-segment>
+                      </ion-col>
+
+                      <ion-col size="12">
+                        <ion-button type="submit" expand="block" class="ion-margin-top" [disabled]="form.invalid">
+                          Save address
+                        </ion-button>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </form>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

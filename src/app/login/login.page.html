@@ -1,0 +1,42 @@
+<ion-content [fullscreen]="true" class="ion-padding ion-margin-top">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center" *ngIf="!showSpinner">
+      <ion-col size="12" size-md="4">
+        <form [formGroup]="form" (ngSubmit)="sendOTP()">
+          <ion-row *ngIf="!showOtpInput">
+            <ion-col>
+              <ion-item lines="full">
+                <ion-input type="email" label="Email" label-placement="floating" required
+                  formControlName="email"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="justify-content-center" *ngIf="showOtpInput">
+            <ion-col>
+              <ng-otp-input (onInputChange)="onOtpChange($event)"
+                [config]="{length:6, allowNumbersOnly:true, containerClass:'d-flex justify-content-evenly', inputClass:'otpInputStyle'}"></ng-otp-input>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-button *ngIf="!showOtpInput" type="submit" color="primary" expand="block" class="ion-margin-bottom"
+                [disabled]="form.invalid">
+                Send OTP
+              </ion-button>
+
+              <ion-button *ngIf="showOtpInput" type="button" color="primary" expand="block" class="ion-margin-bottom"
+                [disabled]="form.invalid" (click)="verifyOTP()">
+                Verify OTP
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-col>
+    </ion-row>
+
+    <ion-spinner color="primary" *ngIf="showSpinner" mode="ios"></ion-spinner>
+
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,32 @@
+.card-input-element {
+  display: none;
+}
+
+ion-card:hover {
+  cursor: pointer;
+}
+
+.card-input-element {
+  margin: 10px;
+  padding: 00px;
+}
+
+.card-input-element:hover {
+  cursor: pointer;
+}
+
+.card-input-element:checked + ion-card {
+  box-shadow: 0 0 1px 1px var(--primary-color);
+}
+
+.btn-outline {
+  --border-color: var(--primary-color);
+  --background-activated: var(--primary-color);
+  --background-hover: var(--primary-color);
+  --background: white;
+  --color: var(--primary-color);
+  --color-hover: white;
+  --color-activated: white;
+  --background-hover-opacity: 1;
+  --background-activated-opacity: 0.5;
+}

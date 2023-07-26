@@ -1,0 +1,68 @@
+<ion-content class="ion-padding">
+  <ion-modal #modal [isOpen]="true" [canDismiss]="true">
+    <ng-template>
+      <ion-content>
+        <ion-toolbar>
+          <ion-title>
+            <ion-text color="dark">
+              <h2>Post</h2>
+            </ion-text>
+          </ion-title>
+          <ion-buttons mode="md" slot="end">
+            <ion-button (click)="closeModal()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+        <div class="wrapper">
+          <ion-grid class="ion-padding-top">
+            <ion-row class="justify-content-center">
+              <ion-col size-sm="12" size="10" *ngIf="!isLoading">
+                <div class="picker" *ngFor="let photo of images.photos">
+                  <ion-img role="button" class="image" (click)="onPickImage()" [src]="photo.webPath"></ion-img>
+                </div>
+              </ion-col>
+              <ion-button color="primary" class="img-selector-button" (click)="onPickImage()" *ngIf="isLoading">
+                <ion-icon name="camera" slot="start"></ion-icon>
+                <ion-label>Select Picture</ion-label>
+              </ion-button>
+              <ion-col size-xs="12" size-sm="10" class="ion-padding-top">
+                <ion-textarea label="Comment" labelPlacement="floating" class="ion-padding-horizontal" [counter]="true"
+                  maxlength="255"></ion-textarea>
+              </ion-col>
+              <ion-col size-xs="12" size-sm="10" class="ion-padding-horizontal">
+                <ion-button type="submit" color="primary" expand="block" class="ion-margin-top">
+                  Post
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>
+
+<!-- <ion-grid>
+  <ion-row class="ion-justify-content-center">
+    <ion-col>
+      <form [formGroup]="form" (ngSubmit)="saveAddress()">
+        <ion-item class="item">
+          <ion-input label="Home No" label-placement="floating" placeholder="e.g. A-202" id="comment"
+            name="comment" autocomplete="address-line1" errorText="Home no is required"
+            formControlName="comment"></ion-input>
+        </ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              <ion-button type="submit" color="primary" expand="block" class="ion-margin-top"
+                [disabled]="form.invalid">
+                Save address
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </ion-col>
+  </ion-row>
+</ion-grid> -->

@@ -1,0 +1,48 @@
+<ion-app>
+  <ion-menu contentId="main-content" color="primary">
+    <ion-header color="primary">
+      <ion-toolbar color="primary">
+        <ion-title color="light">Tiffy</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-menu-toggle auto-hide="false" *ngFor="let pages of Pages; let i = index">
+        <ion-item (click)="navigate(i)" [routerLink]="[pages.url]" lines="none" detail="false"
+          [class.selected]="activeIndex === i">
+          <ion-icon slot="start" [ios]="pages.icon + '-outline'" [md]="pages.icon + '-sharp'"></ion-icon>
+          <ion-label>{{ pages.title }}</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-content>
+  </ion-menu>
+  <div class="ion-page" id="main-content" color="primary">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-menu-button color="light"></ion-menu-button>
+        </ion-buttons>
+        <ion-title color="light">{{title}}</ion-title>
+        <!-- <ion-progress-bar type="indeterminate" color="light"></ion-progress-bar> -->
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-router-outlet></ion-router-outlet>
+      <ion-tabs (ionTabsWillChange)="onTabChange($event)">
+        <ion-tab-bar slot="bottom" color="light">
+          <ion-tab-button tab="home">
+            <ion-icon [name]="activePage === 'home' ? 'home' : 'home-outline'" color="primary"></ion-icon>
+            <ion-text>Home</ion-text>
+          </ion-tab-button>
+          <ion-tab-button tab="menu">
+            <ion-icon [name]="activePage === 'menu' ? 'fast-food' : 'fast-food-outline'" color="primary"></ion-icon>
+            <ion-text>Menu</ion-text>
+          </ion-tab-button>
+          <ion-tab-button tab="orders">
+            <ion-icon [name]="activePage === 'orders' ? 'bag-handle' : 'bag-handle-outline'" color="primary"></ion-icon>
+            <ion-text>Orders</ion-text>
+          </ion-tab-button>
+        </ion-tab-bar>
+      </ion-tabs>
+    </ion-content>
+  </div>
+</ion-app>
