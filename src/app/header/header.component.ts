@@ -75,4 +75,8 @@ export class HeaderComponent implements OnInit {
     }
     this.router.navigate(['./', this.Pages[activeIndex].url]);
   }
+
+  navigateTab(event: any) {
+    this.router.navigate(['./', this.Pages[this.activeIndex].url]);
+  }
 }
