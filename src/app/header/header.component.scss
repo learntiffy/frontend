@@ -16,3 +16,21 @@ ion-tab-bar {
 .tab-selected {
   color: var(--primary-color) !important;
 }
+
+ion-item.active {
+  --highlight-color-focused: white !important;
+}
+
+// ion-item.active {
+//   --background: var(--ion-color-primary) !important;
+//   --color: #fff;
+
+//   + ion-icon {
+//     --ion-color-base: #fff;
+//   }
+// }
+
+// ion-item:not(.active) {
+//   --background: #fff;
+//   --color: var(--primary-color);
+// }
