@@ -29,15 +29,15 @@
       <ion-router-outlet></ion-router-outlet>
       <ion-tabs (ionTabsWillChange)="onTabChange($event)">
         <ion-tab-bar slot="bottom" color="light">
-          <ion-tab-button (click)="navigateTab($event)">
+          <ion-tab-button routerLink="home">
             <ion-icon [name]="activePage === 'home' ? 'home' : 'home-outline'" color="primary"></ion-icon>
             <ion-text>Home</ion-text>
           </ion-tab-button>
-          <ion-tab-button tab="menu" (click)="navigateTab($event)">
+          <ion-tab-button routerLink="menu">
             <ion-icon [name]="activePage === 'menu' ? 'fast-food' : 'fast-food-outline'" color="primary"></ion-icon>
             <ion-text>Menu</ion-text>
           </ion-tab-button>
-          <ion-tab-button tab="orders" (click)="navigateTab($event)">
+          <ion-tab-button routerLink="orders">
             <ion-icon [name]="activePage === 'orders' ? 'bag-handle' : 'bag-handle-outline'" color="primary"></ion-icon>
             <ion-text>Orders</ion-text>
           </ion-tab-button>
