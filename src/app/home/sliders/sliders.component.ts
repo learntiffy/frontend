@@ -31,19 +31,7 @@ export class SlidersComponent implements OnInit {
   }
 
   private setSlidesPerViewOnBreakpoint() {
-    const width = screen.width;
-    let slidesPerView = 3;
-    if (width > 796) {
-      slidesPerView = 8;
-    } else if (width > 640) {
-      slidesPerView = 7;
-    } else if (width > 576) {
-      slidesPerView = 6;
-    } else if (width > 480) {
-      slidesPerView = 5;
-    } else {
-      slidesPerView = 3;
-    }
+    let slidesPerView = screen.width / 130;
     const iconSlider = document.getElementById('icon-slider');
     iconSlider?.setAttribute('slides-per-view', slidesPerView.toString());
   }
