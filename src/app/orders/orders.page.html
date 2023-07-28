@@ -2,7 +2,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-md="12" size-sm="12">
-        <ion-segment mode="ios" value="upcoming" color="primary">
+        <ion-segment mode="ios" value="upcoming" color="primary" (ionChange)="onSegmentChange($event)">
           <ion-segment-button value="upcoming">
             <ion-label class="ion-text-wrap ion-padding-vertical">
               <h2>
@@ -24,5 +24,22 @@
     </ion-row>
   </ion-grid>
 
-  <app-order-card></app-order-card>
+  <div *ngIf="segment === 'upcoming'">
+    <div *ngFor="let order of upcomingOrders">
+      <app-order-card [order]="order"></app-order-card>
+    </div>
+    <div *ngIf="upcomingOrders.length == 0">
+      <ion-text>No orders have been scheduled for now!!!</ion-text>
+    </div>
+  </div>
+
+  <div *ngIf="segment === 'past'">
+    <div *ngFor="let order of pastOrders">
+      <app-order-card [order]="order"></app-order-card>
+    </div>
+    <div *ngIf="pastOrders.length == 0">
+      <ion-text>No orders yet!!!</ion-text>
+    </div>
+  </div>
+
 </ion-content>

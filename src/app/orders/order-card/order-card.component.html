@@ -6,10 +6,19 @@
           <ion-col size="12">
             <ion-card-title>
               <ion-text class="ion-text-sm-wrap">
-                <h1 class="ion-float-left ion-no-margin"><b>Lunch</b></h1>
+                <h1 class="ion-float-left ion-no-margin"><b>{{ order.meal | titlecase }}</b></h1>
               </ion-text>
-              <ion-badge color="success"
-                class="ion-margin-horizontal ion-badge-padding ion-float-end">Delivered</ion-badge>
+              <ion-badge *ngIf="order.status === 'DELIVERED'" color="success" class="ion-badge-padding ion-float-end">
+                <ion-text color="">
+                  {{ order.status | titlecase }}
+                </ion-text>
+              </ion-badge>
+              <ion-badge *ngIf="order.status === 'INCART'" color="warning" class="ion-badge-padding ion-float-end">
+                {{ order.status | titlecase }}
+              </ion-badge>
+              <ion-badge *ngIf="order.status === 'ORDERED'" color="primary" class="ion-badge-padding ion-float-end">
+                {{ order.status | titlecase }}
+              </ion-badge>
             </ion-card-title>
           </ion-col>
         </ion-row>
@@ -21,15 +30,19 @@
     <ion-grid>
       <ion-row class="ion-justify-content-center">
         <ion-col size="12">
-          C/303, Madhav City, Vav Road, Madhav City, Bhabhar - 382120
+          {{ order.address.homeNo }},
+          {{ order.address.society }},
+          {{ order.address.landmark }},
+          {{ order.address.subArea.name }},
+          {{ order.address.area.name }} - {{ order.address.area.pincode }}
         </ion-col>
         <ion-col size="12">
           <ion-segment mode="ios">
             <ion-segment-button class="no-hover-effect">
-              <ion-label class="ion-text-wrap"><b>Order Date : 10/07/2023</b></ion-label>
+              <ion-label class="ion-text-wrap"><b>Order Date : {{ order.orderDate | date: 'dd/MM/yyyy' }} </b></ion-label>
             </ion-segment-button>
             <ion-segment-button class="no-hover-effect">
-              <ion-label class="ion-text-wrap"><b>Delivery Date: 11/07/2023</b></ion-label>
+              <ion-label class="ion-text-wrap"><b>Delivery Date: {{ order.mealDate | date: 'dd/MM/yyyy' }} </b></ion-label>
             </ion-segment-button>
           </ion-segment>
         </ion-col>
@@ -39,34 +52,28 @@
     <ion-accordion-group class="ion-margin-top ion-padding-horizontal">
       <ion-accordion value="first">
         <ion-item slot="header" color="light">
-          <ion-label class="ion-text-sm-wrap">Sabji1, Sabji2, Sabji3, Sabji4, Sabji5, Sabji6, Sabji7 </ion-label>
+          <ion-label class="ion-text-sm-wrap">
+            {{ allItemsName }}
+          </ion-label>
         </ion-item>
         <div class="ion-padding" slot="content">
-          <ion-item>
-            <ion-label>Sabji - Paneer, Vegetable</ion-label>
-            <ion-text slot="end"> &#8377; 200 </ion-text>
-          </ion-item>
+          <div *ngFor="let item of order.items; let i = index">
+            <ion-item *ngIf="i < order.items.length - 1">
+              <ion-label>{{ item.name | titlecase }}</ion-label>
+              <ion-text slot="end"> &#8377; {{ item.price }} </ion-text>
+            </ion-item>
 
-          <ion-item>
-            <ion-label>Dal - Sadi, Tadka</ion-label>
-            <ion-text slot="end"> &#8377; 200 </ion-text>
-          </ion-item>
-
-          <ion-item>
-            <ion-label>Roti - With Ghee, Without Ghee</ion-label>
-            <ion-text slot="end"> &#8377; 200 </ion-text>
-          </ion-item>
-
-          <ion-item lines="none">
-            <ion-label>Special Add-ons - Gulab Jamun, Samosa</ion-label>
-            <ion-text slot="end"> &#8377; 200 </ion-text>
-          </ion-item>
+            <ion-item lines="none" *ngIf="i == order.items.length - 1">
+              <ion-label>{{ item.name | titlecase }}</ion-label>
+              <ion-text slot="end"> &#8377; {{ item.price }} </ion-text>
+            </ion-item>
+          </div>
 
           <hr />
 
           <ion-item lines="none">
             <ion-text> Total </ion-text>
-            <ion-text slot="end"> &#8377; 800 </ion-text>
+            <ion-text slot="end"> &#8377; {{ total }} </ion-text>
           </ion-item>
         </div>
       </ion-accordion>

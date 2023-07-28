@@ -77,6 +77,10 @@ export class UserService {
     return this.http.post<Response>(`${host}/checkout`, { order: order });
   }
 
+  public getOrders(): Observable<Response> {
+    return this.http.get<Response>(`${host}/getOrders`);
+  }
+
   async presentToast(msg: string, duration: number = 3000, route: string = '') {
     const toast = await this.toastController.create({
       message: msg,

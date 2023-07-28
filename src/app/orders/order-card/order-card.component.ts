@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Order } from 'src/app/models/Order';
 
 @Component({
   selector: 'app-order-card',
@@ -7,11 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderCardComponent  implements OnInit {
 
+  @Input() order!: Order;
+  allItemsName = '';
+  total = 0;
+
   showFeedbackModal = false;
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.order.items.forEach((item, i) => {
+      console.log(item, i);
+      this.total += item.price;
+      if(i < this.order.items.length-1){
+        this.allItemsName += (item.name + ', ');
+      } else {
+        this.allItemsName += item.name;
+      }
+    })
+  }
 
   openFeedbackModel() {
     this.showFeedbackModal = true;

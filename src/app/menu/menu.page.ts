@@ -64,7 +64,7 @@ export class MenuPage implements OnInit {
           this.menuChangedSubject.next();
         }
       },
-      error: (error) => {
+      error: (error: any) => {
         this.userService.presentToast('Some error occured!!');
       },
       complete: () => {
