@@ -36,13 +36,13 @@ export class MenuPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+  
+  ionViewWillEnter() {
+    this.userService.setHeaderTitle(Page.MENU);
     this.userService.initCheckoutMap();
     this.initItemTypeMap();
     this.getAllMenu();
-  }
-
-  ionViewWillEnter() {
-    this.userService.setHeaderTitle(Page.MENU);
   }
 
   changeMeal(event: any) {

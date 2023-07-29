@@ -9,7 +9,6 @@ import { Order } from '../models/Order';
   styleUrls: ['./orders.page.scss'],
 })
 export class OrdersPage implements OnInit {
-
   segment: string = 'upcoming';
   orders: Order[] = [];
   pastOrders: Order[] = [];
@@ -17,28 +16,34 @@ export class OrdersPage implements OnInit {
 
   constructor(private userService: UserService) {}
 
-  ngOnInit() {
-    this.getOrders();
-  }
-  
+  ngOnInit() {}
+
   ionViewWillEnter() {
+    this.getOrders();
     this.userService.setHeaderTitle(Page.ORDERS);
   }
 
   onSegmentChange(event: any) {
     this.segment = event.detail.value;
   }
-  
+
   getOrders() {
     this.userService.getOrders().subscribe({
-      next: (response : any) => {
-        if(response.status === 200) {
+      next: (response: any) => {
+        if (response.status === 200) {
           this.orders = response.data;
-          this.pastOrders = this.orders.filter(order => new Date(order.mealDate).getTime() < new Date().getTime());
-          this.upcomingOrders = this.orders.filter(order => new Date(order.mealDate).getTime() >= new Date().getTime());
+          this.pastOrders = this.orders.filter(
+            (order) => new Date(order.mealDate).getTime() < new Date().getTime()
+          );
+          this.upcomingOrders = this.orders.filter(
+            (order) =>
+              new Date(order.mealDate).getTime() >= new Date().getTime()
+          );
         }
       },
-      error: (err: any) => {console.log(err)},
+      error: (err: any) => {
+        console.log(err);
+      },
     });
   }
 }

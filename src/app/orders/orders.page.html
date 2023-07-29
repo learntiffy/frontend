@@ -29,7 +29,13 @@
       <app-order-card [order]="order"></app-order-card>
     </div>
     <div *ngIf="upcomingOrders.length == 0">
-      <ion-text>No orders have been scheduled for now!!!</ion-text>
+      <ion-grid class="d-flex justify-content-center">
+        <ion-row>
+          <ion-col>
+            <ion-text>No orders have been scheduled for now!!!</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </div>
   </div>
 
@@ -38,7 +44,13 @@
       <app-order-card [order]="order"></app-order-card>
     </div>
     <div *ngIf="pastOrders.length == 0">
-      <ion-text>No orders yet!!!</ion-text>
+      <ion-grid class="d-flex justify-content-center">
+        <ion-row>
+          <ion-col>
+            <ion-text>No orders yet!!!</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </div>
   </div>
 
