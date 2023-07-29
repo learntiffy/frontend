@@ -3,13 +3,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Page } from '../models/Page';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
   showOtpInput = false;
   showSpinner = false;
   otp: string = '';
@@ -20,10 +21,9 @@ export class LoginPage implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
-
-  ngOnInit() {}
 
   ionViewWillEnter() {
     this.showOtpInput = false;
@@ -55,9 +55,9 @@ export class LoginPage implements OnInit {
         .subscribe({
           next: (response) => {
             if (response.status === 200) {
-              this.userService.presentToast(response.message, 1000, 'home');
               localStorage.setItem('token', response.data);
               this.authService.setIsLoggedIn();
+              this.router.navigateByUrl('/');
             } else {
               this.userService.presentToast(response.message);
             }

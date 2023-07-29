@@ -7,11 +7,8 @@ import { Page } from '../models/Page';
   templateUrl: './manage-address.page.html',
   styleUrls: ['./manage-address.page.scss'],
 })
-export class ManageAddressPage implements OnInit {
-
+export class ManageAddressPage {
   constructor(private userService: UserService) {}
-
-  ngOnInit() {}
 
   ionViewWillEnter() {
     this.userService.setHeaderTitle(Page.ADDRESS);

@@ -8,15 +8,13 @@
               <ion-text class="ion-text-sm-wrap">
                 <h1 class="ion-float-left ion-no-margin"><b>{{ order.meal | titlecase }}</b></h1>
               </ion-text>
-              <ion-badge *ngIf="order.status === 'DELIVERED'" color="success" class="ion-badge-padding ion-float-end">
-                <ion-text color="">
-                  {{ order.status | titlecase }}
-                </ion-text>
-              </ion-badge>
-              <ion-badge *ngIf="order.status === 'INCART'" color="warning" class="ion-badge-padding ion-float-end">
+              <ion-badge *ngIf="order.status === 'DELIVERED'" class="ion-badge-padding ion-float-end success">
                 {{ order.status | titlecase }}
               </ion-badge>
-              <ion-badge *ngIf="order.status === 'ORDERED'" color="primary" class="ion-badge-padding ion-float-end">
+              <ion-badge *ngIf="order.status === 'INCART'" class="ion-badge-padding ion-float-end warning">
+                {{ order.status | titlecase }}
+              </ion-badge>
+              <ion-badge *ngIf="order.status === 'ORDERED'" class="ion-badge-padding ion-float-end primary">
                 {{ order.status | titlecase }}
               </ion-badge>
             </ion-card-title>
@@ -30,19 +28,23 @@
     <ion-grid>
       <ion-row class="ion-justify-content-center">
         <ion-col size="12">
-          {{ order.address.homeNo }},
-          {{ order.address.society }},
-          {{ order.address.landmark }},
-          {{ order.address.subArea.name }},
-          {{ order.address.area.name }} - {{ order.address.area.pincode }}
+          <ion-text>
+            {{ order.address.homeNo }},
+            {{ order.address.society }},
+            {{ order.address.landmark }},
+            {{ order.address.subArea.name }},
+            {{ order.address.area.name }} - {{ order.address.area.pincode }}
+          </ion-text>
         </ion-col>
         <ion-col size="12">
           <ion-segment mode="ios">
             <ion-segment-button class="no-hover-effect">
-              <ion-label class="ion-text-wrap"><b>Order Date : {{ order.orderDate | date: 'dd/MM/yyyy' }} </b></ion-label>
+              <ion-label class="ion-text-wrap"><b>Order Date : {{ order.orderDate | date: 'dd/MM/yyyy' }}
+                </b></ion-label>
             </ion-segment-button>
             <ion-segment-button class="no-hover-effect">
-              <ion-label class="ion-text-wrap"><b>Delivery Date: {{ order.mealDate | date: 'dd/MM/yyyy' }} </b></ion-label>
+              <ion-label class="ion-text-wrap"><b>Delivery Date: {{ order.mealDate | date: 'dd/MM/yyyy' }}
+                </b></ion-label>
             </ion-segment-button>
           </ion-segment>
         </ion-col>
@@ -63,7 +65,7 @@
               <ion-text slot="end"> &#8377; {{ item.price }} </ion-text>
             </ion-item>
 
-            <ion-item lines="none" *ngIf="i == order.items.length - 1">
+            <ion-item lines="none" *ngIf="i === order.items.length - 1">
               <ion-label>{{ item.name | titlecase }}</ion-label>
               <ion-text slot="end"> &#8377; {{ item.price }} </ion-text>
             </ion-item>

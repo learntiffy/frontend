@@ -9,3 +9,18 @@
   --ion-color-base: green !important;
   --color: white !important;
 }
+
+ion-badge {
+  --color: white;
+  &.success {
+    --background: green !important;
+  }
+
+  &.primary {
+    --background: var(--primary-color) !important;
+  }
+
+  &.warning {
+    --background: #22d8ccfa !important;
+  }
+}
