@@ -1,11 +1,15 @@
 .ion-modal-auto-height {
-    --height: 48vh;
-    --width: 95%
+  --height: 48vh;
+  --width: 95%;
 }
 
 hr {
-    border: none;
-    border-top: 3px dashed black;
-    margin-top: 0px;
-    margin-bottom: 0px;
-  }
+  border: none;
+  border-top: 3px dashed black;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+ion-title {
+  padding: 0 !important;
+}

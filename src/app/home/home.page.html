@@ -3,22 +3,6 @@
     <ion-grid class="ion-margin-top ion-padding-top">
       <app-sliders></app-sliders>
 
-      <!-- <ion-row *ngIf="!isPlatformWeb">
-        <ion-col class="app-features d-flex justify-content-center" size-xs="6" size-sm="4" size-md="3" size-lg="2"
-          size-xl="1" *ngFor="let page of Pages">
-          <ion-card>
-            <ion-card-content>
-              <ion-text>
-                <h1>
-                  <ion-icon name="{{page.icon}}-outline"></ion-icon>
-                </h1>
-              </ion-text>
-              <h2>{{page.title}}</h2>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row> -->
-
       <ion-row class="ion-margin-top ion-padding-top">
         <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" size-xl="3" *ngFor="let item of [1, 2, 3, 4]">
           <app-meal></app-meal>

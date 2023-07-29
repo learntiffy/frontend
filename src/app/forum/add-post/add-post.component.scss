@@ -1,14 +1,15 @@
 .picker {
-  width: 30rem;
-  max-width: 80%;
-  height: 15rem;
-  max-height: 20vh;
+  // width: 30rem;
+  // max-width: 80%;
+  // height: 15rem;
+  // max-height: 20vh;
   border: 1px solid var(--ion-color-primary);
   margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 100%;
+  float: left;
 }
 
 .img-selector-button {
@@ -27,11 +28,11 @@
   // &:hover {
   //   --ion-color-contrast: orange !important
   // }
-
 }
 
 ion-img {
-  border-radius: 200px;
-  height: 200px;
-  width: 200px;
+  border-radius: 100px;
+  height: 100px;
+  width: 100px;
+  float: left !important;
 }

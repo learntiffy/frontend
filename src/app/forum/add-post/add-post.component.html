@@ -1,5 +1,5 @@
 <ion-content class="ion-padding">
-  <ion-modal #modal [isOpen]="true" [canDismiss]="true">
+  <ion-modal #modal [isOpen]="true" [canDismiss]="true" (willDismiss)="onWillDismiss($event)">
     <ng-template>
       <ion-content>
         <ion-toolbar>
@@ -19,7 +19,7 @@
             <ion-row class="justify-content-center">
               <ion-col size-sm="12" size="10" *ngIf="!isLoading">
                 <div class="picker" *ngFor="let photo of images.photos">
-                  <ion-img role="button" class="image" (click)="onPickImage()" [src]="photo.webPath"></ion-img>
+                  <ion-img class="image" (click)="onPickImage()" [src]="photo.webPath"></ion-img>
                 </div>
               </ion-col>
               <ion-button color="primary" class="img-selector-button" (click)="onPickImage()" *ngIf="isLoading">

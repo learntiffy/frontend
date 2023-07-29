@@ -18,7 +18,7 @@ const Pages = [
   {
     title: 'Orders',
     url: 'orders',
-    icon: 'person',
+    icon: 'bag-handle',
   },
   {
     title: 'Manage Address',

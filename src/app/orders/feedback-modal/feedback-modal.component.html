@@ -24,23 +24,14 @@
                     <ion-label> Provide a rating : </ion-label>
                     <app-rating [(rating)]="rating"></app-rating>
                   </ion-item>
-                  <div>
-                    <ion-textarea
-                      label="Comment"
-                      labelPlacement="floating"
-                      fill="solid"
-                      placeholder="Please give additional comments"
-                    ></ion-textarea>
-                  </div>
+                  <ion-item>
+                    <ion-textarea label="Comment" labelPlacement="floating" fill="solid"
+                      placeholder="Please give additional comments"></ion-textarea>
+                  </ion-item>
                   <ion-row>
                     <ion-col>
-                      <ion-button
-                        type="submit"
-                        color="primary"
-                        expand="block"
-                        class="ion-margin-top"
-                        (click)="confirm()"
-                      >
+                      <ion-button type="submit" color="primary" expand="block" class="ion-margin-top"
+                        (click)="confirm()">
                         Submit
                       </ion-button>
                     </ion-col>

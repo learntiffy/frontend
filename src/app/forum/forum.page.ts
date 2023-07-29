@@ -7,15 +7,12 @@ import { Page } from '../models/Page';
   templateUrl: './forum.page.html',
   styleUrls: ['./forum.page.scss'],
 })
-export class ForumPage implements OnInit {
+export class ForumPage {
+  showPostModal = false;
 
-  constructor(private userService: UserService) { }
-
-  ngOnInit() {
-  }
+  constructor(private userService: UserService) {}
 
   ionViewWillEnter() {
     this.userService.setHeaderTitle(Page.FORUM);
   }
-
 }
