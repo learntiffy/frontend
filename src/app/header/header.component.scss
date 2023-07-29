@@ -13,22 +13,28 @@ ion-tab-bar {
   }
 }
 
-.tab-selected {
-  color: var(--primary-color) !important;
-}
-
-ion-item.active {
-  --highlight-color-focused: white !important;
-}
-
 // ion-item.active {
-//   --background: var(--ion-color-primary) !important;
-//   --color: #fff;
+//   --highlight-color-focused: white !important;
+//   --background: rgba(128, 128, 128, 0.637) !important;
+//   --color: white;
 
-//   + ion-icon {
+//   & ion-icon {
 //     --ion-color-base: #fff;
 //   }
 // }
+
+ion-item {
+  --color: grey;
+}
+
+ion-item.active {
+  --color: var(--primary-color);
+  // --background: rgba(128, 128, 128, 0.637) !important;
+
+  + ion-icon {
+    --ion-color-base: var(--primary-color);
+  }
+}
 
 // ion-item:not(.active) {
 //   --background: #fff;

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../services/user.service';
-import { Page } from '../models/Page';
+import { NavController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
 
 const Pages = [
   {
@@ -56,7 +56,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private userService: UserService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private navCtrl: NavController
   ) {}
 
   ngOnInit() {
@@ -73,10 +74,10 @@ export class HeaderComponent implements OnInit {
     if (this.Pages[activeIndex].title === 'Logout') {
       this.authService.logout();
     }
-    this.router.navigate(['./', this.Pages[activeIndex].url]);
+    this.navCtrl.navigateForward(['./', this.Pages[activeIndex].url]);
   }
 
-  navigateTab(event: any) {
-    this.router.navigate(['./', this.Pages[this.activeIndex].url]);
+  navigatePage(url: string) {
+    this.navCtrl.navigateForward(url);
   }
 }

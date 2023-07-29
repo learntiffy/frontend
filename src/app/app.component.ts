@@ -1,8 +1,9 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
+import { App } from '@capacitor/app';
 import { register } from 'swiper/element/bundle';
-import { PushNotificationService } from './services/push-notification.service';
 import { AuthService } from './services/auth.service';
-import { NavigationEnd, Router } from '@angular/router';
+import { PushNotificationService } from './services/push-notification.service';
 
 register();
 
@@ -12,13 +13,21 @@ register();
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(private pushNotificationService: PushNotificationService, private authService: AuthService, private router: Router) {
+  constructor(
+    private pushNotificationService: PushNotificationService,
+    private authService: AuthService,
+    private location: Location
+  ) {
     this.pushNotificationService.initPush();
     // this.router.events.subscribe((ev) => {
     //   if (ev instanceof NavigationEnd) {
     //     this.checkLoginStatus();
     //   }
     // });
+
+    App.addListener('backButton', () => {
+      this.location.back();
+    });
   }
 
   checkLoginStatus() {

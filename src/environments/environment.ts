@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  api_url: 'http://localhost:9999/',
-  AES_SECRET: 'secret'
+  api_url: 'https://tiffy-backend-onex.onrender.com/',
+  AES_SECRET: 'secret',
 };
 
 /*

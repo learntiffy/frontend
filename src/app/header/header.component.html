@@ -7,9 +7,8 @@
     </ion-header>
     <ion-content>
       <ion-menu-toggle auto-hide="false" *ngFor="let pages of Pages; let i = index">
-        <ion-item (click)="navigate(i)" [routerLink]="[pages.url]" routerLinkActive="active" lines="none"
-          detail="false">
-          <ion-icon slot="start" [ios]="pages.icon + '-outline'" [md]="pages.icon + '-sharp'"></ion-icon>
+        <ion-item [routerLink]="[pages.url]" routerLinkActive="active" lines="none" detail="false">
+          <ion-icon slot="start" [name]="pages.icon + '-outline'" color="primary"></ion-icon>
           <ion-label>{{ pages.title }}</ion-label>
         </ion-item>
       </ion-menu-toggle>
@@ -29,15 +28,15 @@
       <ion-router-outlet></ion-router-outlet>
       <ion-tabs (ionTabsWillChange)="onTabChange($event)">
         <ion-tab-bar slot="bottom" color="light">
-          <ion-tab-button routerLink="home">
+          <ion-tab-button (click)="navigatePage('home')">
             <ion-icon [name]="activePage === 'home' ? 'home' : 'home-outline'" color="primary"></ion-icon>
             <ion-text>Home</ion-text>
           </ion-tab-button>
-          <ion-tab-button routerLink="menu">
+          <ion-tab-button (click)="navigatePage('menu')">
             <ion-icon [name]="activePage === 'menu' ? 'fast-food' : 'fast-food-outline'" color="primary"></ion-icon>
             <ion-text>Menu</ion-text>
           </ion-tab-button>
-          <ion-tab-button routerLink="orders">
+          <ion-tab-button (click)="navigatePage('orders')">
             <ion-icon [name]="activePage === 'orders' ? 'bag-handle' : 'bag-handle-outline'" color="primary"></ion-icon>
             <ion-text>Orders</ion-text>
           </ion-tab-button>
