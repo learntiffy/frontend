@@ -9,12 +9,11 @@ import { Item } from 'src/app/models/Item';
 export class CartComponent  implements OnInit {
 
   @Input() items!: Item[];
-  total = 0;
+  @Input() total = 0;
 
   constructor() { }
 
   ngOnInit() {
-    this.items.forEach(item => this.total += item.price);
   }
 
 }

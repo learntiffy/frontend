@@ -13,12 +13,16 @@ import { ItemType } from '../models/ItemType';
   templateUrl: './checkout.page.html',
   styleUrls: ['./checkout.page.scss'],
 })
-export class CheckoutPage implements OnInit, OnChanges {
+export class CheckoutPage implements OnInit {
   isLoading = true;
   mealDay = '';
   mealType = '';
   selectedAddress!: Address;
   items: Item[] = [];
+  additionalComment = '';
+  encryptedOrder: any;
+  total = 0;
+
   itemOrderMap = new Map<string, number>([
     [ItemType.SABJI, 1],
     [ItemType.ROTI, 2],
@@ -32,7 +36,10 @@ export class CheckoutPage implements OnInit, OnChanges {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ionViewWillEnter() {
+    this.userService.setHeaderTitle(Page.CHECKOUT);
     this.mealDay = this.route.snapshot.paramMap.get('day') ?? '';
     this.mealType = this.route.snapshot.paramMap.get('meal') ?? '';
     setTimeout(() => {
@@ -40,33 +47,10 @@ export class CheckoutPage implements OnInit, OnChanges {
     }, 2000);
     this.userService.checkoutMap.forEach((val, key) => {
       this.items.push(...val);
+      this.total += val.reduce((prev, curr) => {
+        return prev + curr.price;
+      }, 0)
     });
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-  }
-
-  prepareOrder() {
-    var today = new Date();
-    var tomorrow = new Date(today);
-    tomorrow.setDate(today.getDate() + 1);
-
-    var encryptedOrder;
-    if (this.mealDay !== '' && this.mealType !== '') {
-      const order = {
-        address: this.selectedAddress._id,
-        meal: this.mealType,
-        mealDate: this.mealDay === 'TODAY' ? today : tomorrow,
-        items: this.setOrderItems(),
-      };
-      console.log({order})
-      encryptedOrder = CryptoJS.AES.encrypt(
-        JSON.stringify(order),
-        environment.AES_SECRET
-      ).toString();
-    }
-    this.isLoading = false;
   }
 
   setAddress(address: Address) {
@@ -78,18 +62,12 @@ export class CheckoutPage implements OnInit, OnChanges {
     var itemsArray: Item[] = [];
     this.userService.checkoutMap.forEach((val, key) => {
       val.forEach((v) => {
-        // items.push(v._id);
         itemsArray.push(v);
       });
     });
     this.sortOrderByType(itemsArray);
-    console.log(itemsArray)
-    itemsArray.forEach(v => items.push(v._id));
+    itemsArray.forEach((v) => items.push(v._id));
     return items;
-  }
-
-  ionViewWillEnter() {
-    this.userService.setHeaderTitle(Page.CHECKOUT);
   }
 
   sortOrderByType(items: Item[]) {
@@ -98,5 +76,44 @@ export class CheckoutPage implements OnInit, OnChanges {
         (this.itemOrderMap.get(a.type) ?? 0) -
         (this.itemOrderMap.get(b.type) ?? 0)
     );
+  }
+
+  prepareOrder() {
+    var today = new Date();
+    var tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+
+    if (this.mealDay !== '' && this.mealType !== '') {
+      const order = {
+        address: this.selectedAddress._id,
+        meal: this.mealType,
+        mealDate: this.mealDay === 'TODAY' ? today : tomorrow,
+        items: this.setOrderItems(),
+        comment: this.additionalComment,
+      };
+      this.encryptedOrder = CryptoJS.AES.encrypt(
+        JSON.stringify(order),
+        environment.AES_SECRET
+      ).toString();
+    }
+    this.isLoading = false;
+  }
+
+  placeOrder() {
+    console.log('place order')
+    this.isLoading = true;
+    this.prepareOrder();
+    this.userService.placeOrder(this.encryptedOrder).subscribe({
+      next: (response) => {
+        if (response.status == 201) {
+          console.log('if')
+          this.userService.presentToast('Order placed successfully!!!');
+          this.isLoading = false;
+        }
+      }, error: (err) => {
+        this.userService.presentToast('Some error occurred!!!');
+        this.isLoading = false;
+      }
+    });
   }
 }

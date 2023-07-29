@@ -13,6 +13,7 @@ export class OrdersPage implements OnInit {
   orders: Order[] = [];
   pastOrders: Order[] = [];
   upcomingOrders: Order[] = [];
+  isLoading: boolean = false;
 
   constructor(private userService: UserService) {}
 
@@ -39,10 +40,12 @@ export class OrdersPage implements OnInit {
             (order) =>
               new Date(order.mealDate).getTime() >= new Date().getTime()
           );
+          this.isLoading = false;
         }
       },
       error: (err: any) => {
         console.log(err);
+        this.isLoading = false;
       },
     });
   }

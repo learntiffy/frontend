@@ -1,5 +1,5 @@
 <ion-content>
-  <ion-grid>
+  <ion-grid *ngIf="!isLoading">
     <ion-row>
       <ion-col size="12" size-md="12" size-sm="12">
         <ion-segment mode="ios" value="upcoming" color="primary" (ionChange)="onSegmentChange($event)">
@@ -53,5 +53,7 @@
       </ion-grid>
     </div>
   </div>
+
+  <ion-spinner color="primary" *ngIf="isLoading" mode="ios"></ion-spinner>
 
 </ion-content>
