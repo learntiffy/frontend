@@ -4,15 +4,24 @@
   </ion-card-header>
   <ion-card-content class="ion-no-padding">
     <ion-list [inset]="true">
-      <ion-item *ngFor="let item of items" class="marginBottom_25">
-        <ion-avatar slot="start">
-          <img alt="Item Image" [src]="item.imageURL"/>
-        </ion-avatar>
-        <ion-label>{{ item.name }}</ion-label>
-        <ion-text class="ion-float-end">&#8377; {{item.price}}</ion-text>
+      <ion-item *ngIf="items.length == 0" class="text-center">
+        <ion-text>
+          <h1>
+            Please add some items to place an order.
+          </h1>
+        </ion-text>
       </ion-item>
+      <div *ngIf="items.length > 0">
+        <ion-item *ngFor="let item of items" class="marginBottom_25">
+          <ion-avatar slot="start">
+            <img alt="Item Image" [src]="item.imageURL" />
+          </ion-avatar>
+          <ion-label>{{ item.name }}</ion-label>
+          <ion-text class="ion-float-end">&#8377; {{item.price}}</ion-text>
+        </ion-item>
+      </div>
       <br>
-      <ion-item>
+      <ion-item *ngIf="items.length > 0">
         <ion-label>
           <ion-text color="primary">
             <h1 class="ion-float-start font-primary">Total</h1>

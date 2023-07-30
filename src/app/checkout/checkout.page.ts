@@ -54,8 +54,9 @@ export class CheckoutPage implements OnInit {
         return prev + curr.price;
       }, 0) 
     });
+    console.log('ionViewEnter checkout', this.items)
   }
-
+  
   setAddress(address: Address) {
     this.selectedAddress = address;
   }
@@ -103,7 +104,7 @@ export class CheckoutPage implements OnInit {
   }
 
   placeOrder() {
-    console.log('place order')
+    console.log('place order', this.items)
     this.isLoading = true;
     this.prepareOrder();
     this.userService.placeOrder(this.encryptedOrder).subscribe({
@@ -111,8 +112,9 @@ export class CheckoutPage implements OnInit {
         if (response.status == 201) {
           console.log('if')
           this.userService.presentToast('Order placed successfully!!!');
-          this.isLoading = false;
+          this.userService.initCheckoutMap();
           this.router.navigate(['./', 'order-placed']);
+          this.isLoading = false;
         }
       }, error: (err) => {
         this.userService.presentToast('Some error occurred!!!');
