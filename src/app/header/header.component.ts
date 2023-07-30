@@ -31,11 +31,6 @@ const Pages = [
     icon: 'chatbubbles',
   },
   {
-    title: 'Register',
-    url: 'register',
-    icon: 'person',
-  },
-  {
     title: 'Logout',
     url: 'login',
     icon: 'log-out',

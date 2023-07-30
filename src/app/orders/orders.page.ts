@@ -29,6 +29,7 @@ export class OrdersPage implements OnInit {
   }
 
   getOrders() {
+    this.isLoading = true;
     this.userService.getOrders().subscribe({
       next: (response: any) => {
         if (response.status === 200) {

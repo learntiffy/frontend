@@ -20,16 +20,26 @@
           </ion-row>
 
           <ion-row>
-            <ion-col>
+            <ion-col size="12" size-sm="12" size-xs="12">
               <ion-button *ngIf="!showOtpInput" type="submit" color="primary" expand="block" class="ion-margin-bottom"
                 [disabled]="form.invalid">
                 Send OTP
               </ion-button>
-
+            </ion-col>
+            <ion-col size="12" size-sm="12" size-xs="12">
               <ion-button *ngIf="showOtpInput" type="button" color="primary" expand="block" class="ion-margin-bottom"
                 [disabled]="form.invalid" (click)="verifyOTP()">
                 Verify OTP
               </ion-button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12" size-sm="12" size-xs="12" class="text-center">
+              <ion-text class="text-center">
+                <h2>
+                  Don't have an account yet? <a href="register"> Sign up </a>
+                </h2>
+              </ion-text>
             </ion-col>
           </ion-row>
         </form>

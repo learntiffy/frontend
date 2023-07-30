@@ -24,7 +24,7 @@
     </ion-row>
   </ion-grid>
 
-  <div *ngIf="segment === 'upcoming'">
+  <div *ngIf="segment === 'upcoming' && !isLoading">
     <div *ngFor="let order of upcomingOrders">
       <app-order-card [order]="order"></app-order-card>
     </div>
@@ -39,7 +39,7 @@
     </div>
   </div>
 
-  <div *ngIf="segment === 'past'">
+  <div *ngIf="segment === 'past' && !isLoading">
     <div *ngFor="let order of pastOrders">
       <app-order-card [order]="order"></app-order-card>
     </div>
