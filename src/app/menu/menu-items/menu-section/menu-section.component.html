@@ -12,7 +12,7 @@
   <hr />
 
   <ion-row class="d-flex justify-content-center">
-    <ion-col size="6" size-xs="12" size-sm="10">
+    <ion-col size="6" size-xs="12" size-sm="12" class="ion-no-margin">
       <div *ngFor="let item of items">
         <app-menu-items [item]="item" [added]="checkIfItemAdded(item)" (onItemAdded)="addItem($event)"></app-menu-items>
       </div>

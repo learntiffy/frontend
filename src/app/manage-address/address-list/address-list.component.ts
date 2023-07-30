@@ -88,6 +88,7 @@ export class AddressListComponent implements OnInit {
     if (this.defaultAddress._id == addressId) {
       this.defaultAddress = this.addressList[0];
     }
+    this.onAddressChange.emit(this.defaultAddress);
   }
 
   async showConfirm() {

@@ -39,6 +39,8 @@ export class MenuPage implements OnInit {
   }
   
   ionViewWillEnter() {
+    console.log('ionviewenter');
+    this.isLoading = true;
     this.userService.setHeaderTitle(Page.MENU);
     this.userService.initCheckoutMap();
     this.initItemTypeMap();
@@ -111,7 +113,6 @@ export class MenuPage implements OnInit {
   }
 
   proceedToCheckout() {
-    console.log(this.userService.checkoutMap)
     if(this.validateCheckoutMap()){
       this.router.navigate(['./', 'checkout', this.selectedDay, this.selectedMeal]);
     }

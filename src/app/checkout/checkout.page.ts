@@ -1,5 +1,5 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { Page } from '../models/Page';
 import { Item } from '../models/Item';
@@ -33,7 +33,8 @@ export class CheckoutPage implements OnInit {
 
   constructor(
     private userService: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {}
@@ -45,11 +46,13 @@ export class CheckoutPage implements OnInit {
     setTimeout(() => {
       this.isLoading = false;
     }, 2000);
+    this.items = [];  
+    this.total = 0;
     this.userService.checkoutMap.forEach((val, key) => {
       this.items.push(...val);
       this.total += val.reduce((prev, curr) => {
         return prev + curr.price;
-      }, 0)
+      }, 0) 
     });
   }
 
@@ -109,6 +112,7 @@ export class CheckoutPage implements OnInit {
           console.log('if')
           this.userService.presentToast('Order placed successfully!!!');
           this.isLoading = false;
+          this.router.navigate(['./', 'order-placed']);
         }
       }, error: (err) => {
         this.userService.presentToast('Some error occurred!!!');
