@@ -1,3 +1,11 @@
+ion-menu {
+  --background: white !important;
+}
+
+.ion-page + ion-header + ion-toolbar &ion-title {
+  color: var(--primary-color);
+}
+
 ion-menu-toggle {
   & ion-item {
     & ion-icon {

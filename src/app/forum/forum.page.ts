@@ -9,6 +9,7 @@ import { Page } from '../models/Page';
 })
 export class ForumPage {
   showPostModal = false;
+  date = new Date();
 
   constructor(private userService: UserService) {}
 

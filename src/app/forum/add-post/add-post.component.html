@@ -17,15 +17,11 @@
         <div class="wrapper">
           <ion-grid class="ion-padding-top">
             <ion-row class="justify-content-center">
-              <ion-col size-sm="12" size="10" *ngIf="!isLoading">
-                <div class="picker" *ngFor="let photo of images.photos">
-                  <ion-img class="image" (click)="onPickImage()" [src]="photo.webPath"></ion-img>
+              <ion-col size-sm="12" size="10">
+                <div class="picker">
+                  <input type="file" (change)="onFileSelect($event)" id="file-input" accept="image/*, video/*">
                 </div>
               </ion-col>
-              <ion-button color="primary" class="img-selector-button" (click)="onPickImage()" *ngIf="isLoading">
-                <ion-icon name="camera" slot="start"></ion-icon>
-                <ion-label>Select Picture</ion-label>
-              </ion-button>
               <ion-col size-xs="12" size-sm="10" class="ion-padding-top">
                 <ion-textarea label="Comment" labelPlacement="floating" class="ion-padding-horizontal" [counter]="true"
                   maxlength="255"></ion-textarea>

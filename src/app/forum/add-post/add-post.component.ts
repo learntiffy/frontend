@@ -5,12 +5,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import {
-  Camera,
-  CameraResultType,
-  CameraSource,
-  GalleryPhotos,
-} from '@capacitor/camera';
+import { Camera } from '@capacitor/camera';
 import { Capacitor } from '@capacitor/core';
 import { IonModal } from '@ionic/angular';
 @Component({
@@ -23,27 +18,25 @@ export class AddPostComponent implements OnInit {
   @Output() close = new EventEmitter<boolean>();
   @Output() imagePick = new EventEmitter<string>();
   selectedImage?: string;
-  images: GalleryPhotos = { photos: [] };
+  selectedFile!: File;
   isLoading = true;
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('oninit');
+  }
 
-  async onPickImage() {
-    if (!Capacitor.isPluginAvailable('Camera')) {
-      return;
+  onFileSelect(event: any) {
+    const files = event.target.files;
+    console.log(files);
+
+    if (files?.length > 0) {
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onloadend = (e: any) => {
+        this.selectedFile = files[0];
+      };
     }
-    this.images = await Camera.pickImages({
-      quality: 100,
-      height: 10,
-      width: 10,
-      limit: 5,
-      presentationStyle: 'fullscreen',
-    });
-    console.log(this.images);
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 100);
   }
 
   closeModal(isSuccess = false): void {
