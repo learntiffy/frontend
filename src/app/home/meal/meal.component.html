@@ -27,46 +27,11 @@
 
         <ion-col size="12">
           <ion-list>
-            <ion-item>
+            <ion-item *ngFor="let item of items">
               <ion-label class="d-flex ion-justify-content-center ion-align-items-center">
                 <ion-icon name="restaurant-sharp"></ion-icon>&nbsp;
-                <ion-text>2 Sabji</ion-text>
+                <ion-text>{{item}}</ion-text>
               </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label class="d-flex ion-justify-content-center ion-align-items-center">
-                <ion-icon name="restaurant-sharp"></ion-icon>&nbsp;
-                5 Roti
-              </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label class="d-flex ion-justify-content-center ion-align-items-center">
-                <ion-icon name="restaurant-sharp"></ion-icon>&nbsp;
-                Rice
-              </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label class="d-flex ion-justify-content-center ion-align-items-center">
-                <ion-icon name="restaurant-sharp"></ion-icon>&nbsp;
-                Daal
-              </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label class="d-flex ion-justify-content-center ion-align-items-center">
-                <ion-icon name="restaurant-sharp"></ion-icon>&nbsp;
-                Salad
-              </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label class="d-flex ion-justify-content-center ion-align-items-center">
-                <ion-icon name="restaurant-sharp"></ion-icon>&nbsp;
-                Buttermilk
-              </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label class="d-flex ion-justify-content-center ion-align-items-center"><ion-icon
-                  name="restaurant-sharp"></ion-icon>&nbsp;
-                SPECIAL ITEM (if any)</ion-label>
             </ion-item>
           </ion-list>
         </ion-col>

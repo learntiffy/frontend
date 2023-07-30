@@ -5,10 +5,16 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './meal.component.html',
   styleUrls: ['./meal.component.scss'],
 })
-export class MealComponent  implements OnInit {
-
-  constructor() { }
+export class MealComponent implements OnInit {
+  items = [
+    '2 Sabji',
+    '5 Roti',
+    'Rice',
+    'Dal',
+    'Salad',
+    'SPECIAL ITEM (if any)',
+  ];
+  constructor() {}
 
   ngOnInit() {}
-
 }
