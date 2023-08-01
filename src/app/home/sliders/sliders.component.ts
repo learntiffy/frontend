@@ -25,15 +25,23 @@ export class SlidersComponent implements OnInit {
 
   swiperReady() {
     setTimeout(() => {
-      this.setSlidesPerViewOnBreakpoint();
       this.swiperRef?.nativeElement.swiper.autoplay.start();
+      this.setSlidesPerViewOnBreakpoint();
     }, 0);
   }
 
   private setSlidesPerViewOnBreakpoint() {
-    let slidesPerView = screen.width / 130;
+    const width = screen.width;
+    const iconSlidesPerView = width / 130;
+    let imageSlidesPerView = 1;
     const iconSlider = document.getElementById('icon-slider');
-    iconSlider?.setAttribute('slides-per-view', slidesPerView.toString());
+    const imageSlider = document.getElementById('image-slider');
+
+    if (width > 1080) imageSlidesPerView = 3;
+    else if (width > 796) imageSlidesPerView = 2;
+
+    iconSlider?.setAttribute('slides-per-view', iconSlidesPerView.toString());
+    imageSlider?.setAttribute('slides-per-view', imageSlidesPerView.toString());
   }
 
   onBreakpointChange(event: any) {
