@@ -95,4 +95,5 @@
 
 </ion-card>
 
-<app-feedback-modal *ngIf="showFeedbackModal"></app-feedback-modal>
+<app-feedback-modal *ngIf="showFeedbackModal" [isModalOpen]="showFeedbackModal"
+  (close)="showFeedbackModal = false"></app-feedback-modal>

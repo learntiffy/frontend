@@ -28,7 +28,7 @@
     <div *ngFor="let order of upcomingOrders">
       <app-order-card [order]="order"></app-order-card>
     </div>
-    <div *ngIf="upcomingOrders.length == 0">
+    <div *ngIf="upcomingOrders.length === 0">
       <ion-grid class="d-flex justify-content-center">
         <ion-row>
           <ion-col size="12">
@@ -43,7 +43,7 @@
     <div *ngFor="let order of pastOrders">
       <app-order-card [order]="order"></app-order-card>
     </div>
-    <div *ngIf="pastOrders.length == 0">
+    <div *ngIf="pastOrders.length === 0">
       <ion-grid class="d-flex justify-content-center">
         <ion-row>
           <ion-col size="12">
