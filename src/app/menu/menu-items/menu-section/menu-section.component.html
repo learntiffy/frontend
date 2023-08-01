@@ -1,15 +1,19 @@
 <ion-grid *ngIf="!isLoading && items.length > 0">
   <ion-row>
-    <ion-item lines="none">
-      <ion-label>
-        <h2>
-          <b> {{ section }} </b>
-        </h2>
-      </ion-label>
-    </ion-item>
+    <ion-col size="12" size-sm="12" size-md="12" size-xl="12">
+      <ion-item lines="none">
+        <ion-label>
+          <ion-segment value="default">
+            <ion-segment-button value="default">
+              <ion-label>
+                <h2>{{ section }}</h2>
+              </ion-label>
+            </ion-segment-button>
+          </ion-segment>
+        </ion-label>
+      </ion-item>
+    </ion-col>
   </ion-row>
-
-  <hr />
 
   <ion-row class="d-flex justify-content-center">
     <ion-col size="6" size-xs="12" size-sm="12" class="ion-no-margin">

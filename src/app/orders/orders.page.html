@@ -2,21 +2,28 @@
   <ion-grid *ngIf="!isLoading">
     <ion-row>
       <ion-col size="12" size-md="12" size-sm="12">
-        <ion-segment mode="ios" value="upcoming" color="primary" (ionChange)="onSegmentChange($event)">
-          <ion-segment-button value="upcoming">
-            <ion-label class="ion-text-wrap ion-padding-vertical">
-              <h2>
-                <b>
-                  Upcoming Orders
-                </b>
-              </h2>
-            </ion-label>
-          </ion-segment-button>
+        <ion-segment mode="ios" value="today" color="primary" (ionChange)="onSegmentChange($event)">
           <ion-segment-button value="past">
             <ion-label class="ion-text-wrap">
-              <h2>
-                <b>Past Orders</b>
-              </h2>
+              <h3>
+                <b>Past</b>
+              </h3>
+            </ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="today">
+            <ion-label class="ion-text-wrap">
+              <h3>
+                <b>Today</b>
+              </h3>
+            </ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="upcoming">
+            <ion-label class="ion-text-wrap ion-padding-vertical">
+              <h3>
+                <b>
+                  Upcoming
+                </b>
+              </h3>
             </ion-label>
           </ion-segment-button>
         </ion-segment>
@@ -29,6 +36,21 @@
       <app-order-card [order]="order"></app-order-card>
     </div>
     <div *ngIf="upcomingOrders.length === 0">
+      <ion-grid class="d-flex justify-content-center">
+        <ion-row>
+          <ion-col size="12">
+            <img src="../../assets/images/noOrders.svg" width="100%">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+
+  <div *ngIf="segment === 'today' && !isLoading">
+    <div *ngFor="let order of todayOrders">
+      <app-order-card [order]="order"></app-order-card>
+    </div>
+    <div *ngIf="todayOrders.length == 0">
       <ion-grid class="d-flex justify-content-center">
         <ion-row>
           <ion-col size="12">

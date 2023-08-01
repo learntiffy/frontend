@@ -9,10 +9,11 @@ import { Order } from '../models/Order';
   styleUrls: ['./orders.page.scss'],
 })
 export class OrdersPage implements OnInit {
-  segment: string = 'upcoming';
+  segment: string = 'today';
   orders: Order[] = [];
   pastOrders: Order[] = [];
   upcomingOrders: Order[] = [];
+  todayOrders: Order[] = [];
   isLoading: boolean = false;
 
   constructor(private userService: UserService) {}
@@ -21,6 +22,7 @@ export class OrdersPage implements OnInit {
 
   ionViewWillEnter() {
     this.getOrders();
+    this.segment = 'today';
     this.userService.setHeaderTitle(Page.ORDERS);
   }
 
@@ -34,13 +36,7 @@ export class OrdersPage implements OnInit {
       next: (response: any) => {
         if (response.status === 200) {
           this.orders = response.data;
-          this.pastOrders = this.orders.filter(
-            (order) => new Date(order.mealDate).getTime() < new Date().getTime()
-          );
-          this.upcomingOrders = this.orders.filter(
-            (order) =>
-              new Date(order.mealDate).getTime() >= new Date().getTime()
-          );
+          this.filterByDate(this.orders);
           this.isLoading = false;
         }
       },
@@ -49,5 +45,23 @@ export class OrdersPage implements OnInit {
         this.isLoading = false;
       },
     });
+  }
+
+  filterByDate(orders: Order[]) {
+    orders.forEach(order => {
+      const mealDate = new Date(order.mealDate);
+      const currDate = new Date();
+
+      mealDate.setHours(0,0,0,0);
+      currDate.setHours(0,0,0,0);
+
+      if(mealDate.valueOf() === currDate.valueOf()) {
+        this.todayOrders.push(order);
+      } else if(mealDate > currDate) {
+        this.upcomingOrders.push(order);
+      } else {
+        this.pastOrders.push(order)
+      }
+    })
   }
 }
