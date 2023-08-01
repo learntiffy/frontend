@@ -15,6 +15,7 @@ import { ItemType } from '../models/ItemType';
 })
 export class CheckoutPage implements OnInit {
   isLoading = true;
+  isSubmitting = false;
   mealDay = '';
   mealType = '';
   selectedAddress!: Address;
@@ -46,17 +47,17 @@ export class CheckoutPage implements OnInit {
     setTimeout(() => {
       this.isLoading = false;
     }, 2000);
-    this.items = [];  
+    this.items = [];
     this.total = 0;
     this.userService.checkoutMap.forEach((val, key) => {
       this.items.push(...val);
       this.total += val.reduce((prev, curr) => {
         return prev + curr.price;
-      }, 0) 
+      }, 0);
     });
-    console.log('ionViewEnter checkout', this.items)
+    console.log('ionViewEnter checkout', this.items);
   }
-  
+
   setAddress(address: Address) {
     this.selectedAddress = address;
   }
@@ -104,22 +105,26 @@ export class CheckoutPage implements OnInit {
   }
 
   placeOrder() {
-    console.log('place order', this.items)
-    this.isLoading = true;
-    this.prepareOrder();
-    this.userService.placeOrder(this.encryptedOrder).subscribe({
-      next: (response) => {
-        if (response.status == 201) {
-          console.log('if')
-          this.userService.presentToast('Order placed successfully!!!');
-          this.userService.initCheckoutMap();
-          this.router.navigate(['./', 'order-placed']);
+    if (!this.isSubmitting) {
+      this.isSubmitting = true;
+      this.isLoading = true;
+      this.prepareOrder();
+      this.userService.placeOrder(this.encryptedOrder).subscribe({
+        next: (response) => {
+          if (response.status == 201) {
+            console.log('if');
+            this.userService.presentToast('Order placed successfully!!!');
+            this.userService.initCheckoutMap();
+            this.router.navigate(['./', 'order-placed']);
+            this.isLoading = false;
+          }
+        },
+        error: (err) => {
+          this.userService.presentToast('Some error occurred!!!');
           this.isLoading = false;
-        }
-      }, error: (err) => {
-        this.userService.presentToast('Some error occurred!!!');
-        this.isLoading = false;
-      }
-    });
+          this.isSubmitting = false;
+        },
+      });
+    }
   }
 }

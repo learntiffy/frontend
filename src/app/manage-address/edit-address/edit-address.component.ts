@@ -23,7 +23,7 @@ export class EditAddressComponent implements OnInit {
   @Output() close = new EventEmitter<boolean>();
   @Input() isModalOpen!: boolean;
   @Input() addressId!: string;
-
+  isSubmitting = false;
   isEdit = false;
   AddressType = AddressType;
 
@@ -93,7 +93,9 @@ export class EditAddressComponent implements OnInit {
 
   getSubArea(areaId?: string): void {
     if (!areaId) areaId = this.form.value.area ?? '';
-    const selectedArea = this.areaList?.filter((area) => area._id === areaId)[0];
+    const selectedArea = this.areaList?.filter(
+      (area) => area._id === areaId
+    )[0];
     if (selectedArea.subAreaList) {
       this.subAreaList = selectedArea.subAreaList;
     } else {
@@ -113,7 +115,8 @@ export class EditAddressComponent implements OnInit {
 
   saveAddress(): void {
     const value = this.form.value;
-    if (!this.form.invalid) {
+    if (!this.form.invalid && !this.isSubmitting) {
+      this.isSubmitting = true;
       const address = new Address(
         value.homeNo ?? '',
         value.society ?? '',
@@ -133,6 +136,7 @@ export class EditAddressComponent implements OnInit {
         },
         error: (err) => {
           this.userService.presentToast(err.error);
+          this.isSubmitting = false;
         },
       });
     }
