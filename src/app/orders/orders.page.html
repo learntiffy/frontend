@@ -50,7 +50,7 @@
     <div *ngFor="let order of todayOrders">
       <app-order-card [order]="order"></app-order-card>
     </div>
-    <div *ngIf="todayOrders.length == 0">
+    <div *ngIf="todayOrders.length === 0">
       <ion-grid class="d-flex justify-content-center">
         <ion-row>
           <ion-col size="12">

@@ -6,7 +6,7 @@
           <ion-col size="12">
             <ion-card-title>
               <ion-text class="ion-text-sm-wrap">
-                <h1 class="ion-float-left ion-no-margin"><b>{{ order.meal | titlecase }}</b></h1>
+                <h2 class="ion-float-left ion-no-margin"><b>{{ order.meal | titlecase }}</b></h2>
               </ion-text>
               <ion-badge *ngIf="order.status === 'DELIVERED'" class="ion-badge-padding ion-float-end success">
                 {{ order.status | titlecase }}

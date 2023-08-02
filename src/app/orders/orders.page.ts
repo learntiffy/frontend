@@ -41,7 +41,6 @@ export class OrdersPage implements OnInit {
         }
       },
       error: (err: any) => {
-        console.log(err);
         this.isLoading = false;
       },
     });

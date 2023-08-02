@@ -55,7 +55,6 @@ export class HeaderComponent implements OnInit {
     this.authService.loginStatus.subscribe((isLoggedIn) => {
       this.isLoggedIn = isLoggedIn;
     });
-    console.log(this.isLoggedIn);
     this.userService.title.subscribe((title) => {
       this.title = title;
     });

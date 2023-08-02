@@ -5,12 +5,6 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './order-placed.page.html',
   styleUrls: ['./order-placed.page.scss'],
 })
-export class OrderPlacedPage implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-    console.log(',kjkj')
-  }
-
+export class OrderPlacedPage {
+  constructor() {}
 }

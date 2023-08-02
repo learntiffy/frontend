@@ -4,13 +4,14 @@ import { Page } from '../models/Page';
 import { User } from '../models/User';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
-export class RegisterPage implements OnInit {
+export class RegisterPage {
   form = new FormGroup({
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
@@ -25,10 +26,9 @@ export class RegisterPage implements OnInit {
 
   constructor(
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
-
-  ngOnInit() {}
 
   ionViewWillEnter() {
     this.userService.setHeaderTitle(Page.REGISTER);
@@ -41,15 +41,11 @@ export class RegisterPage implements OnInit {
       this.form.value.email ?? '',
       this.form.value.mobile ?? ''
     );
-    console.log(this.form.value, user);
     this.authService.registerUser(user).subscribe({
       next: (response) => {
         if (response.status === 201) {
-          this.userService.presentToast(
-            'User created successfully!!!',
-            2000,
-            'login'
-          );
+          this.userService.presentToast('Registered successfully!!!', 2000);
+          this.router.navigate(['login']);
           this.authService.setCurrentUserEmail(user.email);
         } else if (response.status === 401) {
           this.userService.presentToast(response.message);
