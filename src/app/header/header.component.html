@@ -12,6 +12,18 @@
           <ion-label>{{ pages.title }}</ion-label>
         </ion-item>
       </ion-menu-toggle>
+      <ion-menu-toggle auto-hide="false" *ngIf="isLoggedIn">
+        <ion-item lines="none" detail="false" (click)="logout()">
+          <ion-icon slot="start" name="log-out-outline" color="primary"></ion-icon>
+          <ion-label>Logout</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle auto-hide="false" *ngIf="!isLoggedIn">
+        <ion-item lines="none" detail="false" routerLink="/login">
+          <ion-icon slot="start" name="log-in-outline" color="primary"></ion-icon>
+          <ion-label>Login</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
     </ion-content>
   </ion-menu>
   <div class="ion-page" id="main-content" color="primary">

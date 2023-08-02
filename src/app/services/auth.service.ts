@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -12,11 +12,13 @@ const HOST = environment.api_url + 'authe';
   providedIn: 'root',
 })
 export class AuthService {
-
   currentUserEmail = '';
   isLoggedIn = false;
+  public loginStatus = new EventEmitter<boolean>();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {
+    this.isLoggedIn = !!localStorage.getItem('token');
+  }
 
   public registerUser(user: User): Observable<Response> {
     return this.http.post<Response>(`${HOST}/registerUser`, {
@@ -37,13 +39,17 @@ export class AuthService {
   }
 
   public verifyOTP(otp: string, email: string): Observable<Response> {
-    return this.http.post<Response>(`${HOST}/verifyOTP`, {email : email, otp: otp});
+    return this.http.post<Response>(`${HOST}/verifyOTP`, {
+      email: email,
+      otp: otp,
+    });
   }
 
   public logout() {
     localStorage.clear();
     this.isLoggedIn = false;
-    this.router.navigate(['./','login']);
+    this.loginStatus.emit(false);
+    this.router.navigate(['./', 'login']);
   }
 
   public setIsLoggedIn() {

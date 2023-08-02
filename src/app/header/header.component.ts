@@ -30,11 +30,6 @@ const Pages = [
     url: 'forum',
     icon: 'chatbubbles',
   },
-  {
-    title: 'Logout',
-    url: 'login',
-    icon: 'log-out',
-  },
 ];
 
 @Component({
@@ -47,6 +42,7 @@ export class HeaderComponent implements OnInit {
   activeIndex = 0;
   Pages = Pages;
   activePage = 'home';
+  isLoggedIn = false;
 
   constructor(
     private userService: UserService,
@@ -56,6 +52,10 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.authService.loginStatus.subscribe((isLoggedIn) => {
+      this.isLoggedIn = isLoggedIn;
+    });
+    console.log(this.isLoggedIn);
     this.userService.title.subscribe((title) => {
       this.title = title;
     });
@@ -65,11 +65,9 @@ export class HeaderComponent implements OnInit {
     this.activePage = event.tab;
   }
 
-  navigate(activeIndex: number) {
-    if (this.Pages[activeIndex].title === 'Logout') {
-      this.authService.logout();
-    }
-    this.navCtrl.navigateForward(['./', this.Pages[activeIndex].url]);
+  logout() {
+    this.isLoggedIn = false;
+    this.authService.logout();
   }
 
   navigatePage(url: string) {
