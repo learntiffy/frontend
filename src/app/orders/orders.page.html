@@ -1,6 +1,6 @@
 <ion-content>
-  <ion-grid *ngIf="!isLoading">
-    <ion-row>
+  <ion-grid>
+    <ion-row *ngIf="!isLoading">
       <ion-col size="12" size-md="12" size-sm="12">
         <ion-segment mode="ios" value="today" color="primary" (ionChange)="onSegmentChange($event)">
           <ion-segment-button value="past">
@@ -29,52 +29,54 @@
         </ion-segment>
       </ion-col>
     </ion-row>
+
+    <ion-row *ngIf="segment === 'past' && !isLoading" class="ion-justify-content-center">
+      <ion-col size-xs="12" size-sm="12" size-md="10" size-lg="7" size-xl="7">
+        <app-order-card [order]="order" *ngFor="let order of pastOrders"></app-order-card>
+      </ion-col>
+      <ion-col size="12" *ngIf="pastOrders.length === 0">
+        <ion-grid class="d-flex justify-content-center">
+          <ion-row>
+            <ion-col size="12">
+              <img src="../../assets/images/noOrders.svg" width="100%">
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="segment === 'today' && !isLoading" class="ion-justify-content-center">
+      <ion-col size-xs="12" size-sm="12" size-md="10" size-lg="7" size-xl="7">
+        <app-order-card [order]="order" *ngFor="let order of todayOrders"></app-order-card>
+      </ion-col>
+      <ion-col size="12" *ngIf="todayOrders.length === 0">
+        <ion-grid class="d-flex justify-content-center">
+          <ion-row>
+            <ion-col size="12">
+              <img src="../../assets/images/noOrders.svg" width="100%">
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+
+
+
+    <ion-row *ngIf="segment === 'upcoming' && !isLoading">
+      <ion-col size-xs="12" size-sm="12" size-md="10" size-lg="7" size-xl="7">
+        <app-order-card [order]="order" *ngFor="let order of upcomingOrders"></app-order-card>
+      </ion-col>
+      <ion-col size="12" *ngIf="upcomingOrders.length === 0">
+        <ion-grid class="d-flex justify-content-center">
+          <ion-row>
+            <ion-col size="12">
+              <img src="../../assets/images/noOrders.svg" width="100%">
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
   </ion-grid>
-
-  <div *ngIf="segment === 'upcoming' && !isLoading">
-    <div *ngFor="let order of upcomingOrders">
-      <app-order-card [order]="order"></app-order-card>
-    </div>
-    <div *ngIf="upcomingOrders.length === 0">
-      <ion-grid class="d-flex justify-content-center">
-        <ion-row>
-          <ion-col size="12">
-            <img src="../../assets/images/noOrders.svg" width="100%">
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
-  </div>
-
-  <div *ngIf="segment === 'today' && !isLoading">
-    <div *ngFor="let order of todayOrders">
-      <app-order-card [order]="order"></app-order-card>
-    </div>
-    <div *ngIf="todayOrders.length === 0">
-      <ion-grid class="d-flex justify-content-center">
-        <ion-row>
-          <ion-col size="12">
-            <img src="../../assets/images/noOrders.svg" width="100%">
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
-  </div>
-
-  <div *ngIf="segment === 'past' && !isLoading">
-    <div *ngFor="let order of pastOrders">
-      <app-order-card [order]="order"></app-order-card>
-    </div>
-    <div *ngIf="pastOrders.length === 0">
-      <ion-grid class="d-flex justify-content-center">
-        <ion-row>
-          <ion-col size="12">
-            <img src="../../assets/images/noOrders.svg" width="100%">
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
-  </div>
 
   <ion-spinner color="primary" *ngIf="isLoading" mode="ios"></ion-spinner>
 

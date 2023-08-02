@@ -37,12 +37,12 @@
           </ion-text>
         </ion-col>
         <ion-col size="12">
-          <ion-segment mode="ios">
-            <ion-segment-button class="no-hover-effect">
+          <ion-segment mode="md" value="default">
+            <ion-segment-button class="no-hover-effect" value="default">
               <ion-label class="ion-text-wrap"><b>Order Date : {{ order.orderDate | date: 'dd/MM/yyyy' }}
                 </b></ion-label>
             </ion-segment-button>
-            <ion-segment-button class="no-hover-effect">
+            <ion-segment-button class="no-hover-effect" value="default">
               <ion-label class="ion-text-wrap"><b>Delivery Date: {{ order.mealDate | date: 'dd/MM/yyyy' }}
                 </b></ion-label>
             </ion-segment-button>
