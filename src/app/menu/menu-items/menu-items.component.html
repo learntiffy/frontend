@@ -14,10 +14,14 @@
             (click)="onItemAddRemove(item)"
           >
             <ion-label color="dark" *ngIf="!added">
-              Add
+              <b>
+                Add
+              </b>
             </ion-label>
             <ion-label color="danger" *ngIf="added">
-              Remove
+              <b>
+                Remove
+              </b>
             </ion-label>
             <div class="ion-activatable ripple-parent rounded-rectangle">
               <ion-ripple-effect></ion-ripple-effect>

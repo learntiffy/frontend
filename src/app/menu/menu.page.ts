@@ -39,7 +39,6 @@ export class MenuPage implements OnInit {
   }
   
   ionViewWillEnter() {
-    console.log('ionviewenter');
     this.isLoading = true;
     this.userService.setHeaderTitle(Page.MENU);
     this.userService.initCheckoutMap();
@@ -79,7 +78,6 @@ export class MenuPage implements OnInit {
     this.currentMenu = this.menuMap.get(
       this.selectedDay + '_' + this.selectedMeal
     );
-    console.log(this.currentMenu)
     this.initItemTypeMap();
     this.createItemTypeMap(this.currentMenu);
     this.userService.initCheckoutMap();
