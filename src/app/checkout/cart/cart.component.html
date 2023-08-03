@@ -1,6 +1,14 @@
 <ion-card>
   <ion-card-header class="ion-align-items-center">
-    <ion-card-title> Items in cart </ion-card-title>
+    <ion-card-title> 
+      <ion-segment value="default" mode="md">
+        <ion-segment-button value="default">
+          <ion-label>
+            <h2><b>Items in cart</b></h2>
+          </ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-card-title>
   </ion-card-header>
   <ion-card-content class="ion-no-padding">
     <ion-list [inset]="true">
@@ -11,12 +19,16 @@
           </h1>
         </ion-text>
       </ion-item>
-      <div *ngIf="items.length > 0">
+      <div *ngIf="items.length > 0" class="border-bottom">
         <ion-item *ngFor="let item of items" class="marginBottom_25">
           <ion-avatar slot="start">
             <img alt="Item Image" [src]="item.imageURL" />
           </ion-avatar>
-          <ion-label>{{ item.name }}</ion-label>
+          <ion-label>
+            {{ item.name }} <ion-text color="medium">
+              <br>
+              <small>({{ item.unit }})</small></ion-text>
+          </ion-label>
           <ion-text class="ion-float-end">&#8377; {{item.price}}</ion-text>
         </ion-item>
       </div>
