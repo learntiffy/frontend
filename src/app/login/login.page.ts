@@ -56,7 +56,7 @@ export class LoginPage {
           next: (response) => {
             if (response.status === 200) {
               localStorage.setItem('token', response.data);
-              // this.authService.setIsLoggedIn();
+              this.authService.setIsLoggedIn();
               this.authService.loginStatus.emit(true);
               this.router.navigateByUrl('/');
             } else {

@@ -19,11 +19,12 @@ export class UserAuthGuard {
     const token = localStorage.getItem('token');
 
     if (!token) {
-      this.authService.isLoggedIn = true;
       this.router.navigate(['./', 'login']);
       return false;
     }
     // logged in, so return true
+    this.authService.isLoggedIn = true;
+    this.authService.loginStatus.emit(true);
     return true;
   }
 }
