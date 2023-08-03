@@ -1,7 +1,8 @@
 import { Item } from './Item';
 
 export interface Menu {
-    items: Item[],
-    meal: string,
-    name: string
+  items: Item[];
+  meal: string;
+  name: string;
+  isSet: boolean;
 }

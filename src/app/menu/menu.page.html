@@ -3,11 +3,8 @@
     <ion-row class="ion-justify-content-center ion-margin-horizontal">
       <ion-col size-sm="12" size="12" size-md="10">
         <ion-segment [value]="Meal.LUNCH" mode="ios" (ionChange)="changeMeal($event)">
-          <ion-segment-button [value]="Meal.LUNCH">
-            <ion-label>Lunch</ion-label>
-          </ion-segment-button>
-          <ion-segment-button [value]="Meal.DINNER">
-            <ion-label>Dinner</ion-label>
+          <ion-segment-button [value]="meal.value" [disabled]="disableMeal(meal)" *ngFor="let meal of mealOptions">
+            <ion-label>{{ meal.label }}</ion-label>
           </ion-segment-button>
         </ion-segment>
       </ion-col>
@@ -24,10 +21,10 @@
         <ion-row class="ion-justify-content-end ion-padding-end">
           <ion-radio-group [allowEmptySelection]="false" [value]="selectedDay" class="ion-hide-sm-down ion-margin-end"
             (ionChange)="changeDay($event)">
-            <ion-radio value="TODAY" labelPlacement="end" class="ion-margin-end">
-              Today
+            <ion-radio [value]="day.value" [disabled]="day.isDisabled" labelPlacement="end"
+              [ngClass]="{'ion-margin-end': day.value === Day.TODAY}" *ngFor="let day of dayOptions">
+              {{day.label}}
             </ion-radio>
-            <ion-radio value="TOMO" labelPlacement="end"> Tomorrow </ion-radio>
           </ion-radio-group>
 
           <ion-radio-group [allowEmptySelection]="false" [value]="selectedDay" mode="ios" class="ion-hide-sm-up"

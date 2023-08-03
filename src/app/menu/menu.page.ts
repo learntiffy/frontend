@@ -1,22 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { Meal } from '../constants/Meal';
-import { UserService } from '../services/user.service';
-import { Menu } from '../models/Menu';
-import { Item } from '../models/Item';
-import { MenuWrapper } from '../models/MenuWrapper';
-import { ItemType } from '../models/ItemType';
-import { Page } from '../models/Page';
-import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { Meal } from '../constants/Meal';
+import { Item } from '../models/Item';
+import { ItemType } from '../models/ItemType';
+import { Menu } from '../models/Menu';
+import { MenuWrapper } from '../models/MenuWrapper';
+import { Page } from '../models/Page';
+import { UserService } from '../services/user.service';
+import { environment } from 'src/environments/environment';
+import { Day } from '../constants/Day';
 
-const quantityMap = new Map<string, number>(  );
+const quantityMap = new Map<string, number>();
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.page.html',
   styleUrls: ['./menu.page.scss'],
 })
-export class MenuPage implements OnInit {
+export class MenuPage {
   Meal = Meal;
+  Day = Day;
   selectedMeal = Meal.LUNCH;
   selectedDay = 'TODAY';
   menuMap = new Map<string, Menu>();
@@ -24,7 +27,16 @@ export class MenuPage implements OnInit {
   checkOutMap = new Map<string, Item[]>();
   currentMenu?: Menu;
 
-  isLoading = true ;
+  mealOptions = [
+    { isDisabled: false, value: Meal.LUNCH, label: 'Lunch' },
+    { isDisabled: false, value: Meal.DINNER, label: 'Dinner' },
+  ];
+  dayOptions = [
+    { isDisabled: false, value: Day.TODAY, label: 'Today' },
+    { isDisabled: false, value: Day.TOMO, label: 'Tomorrow' },
+  ];
+
+  isLoading = true;
 
   menuChangedSubject = new Subject<void>();
 
@@ -35,15 +47,28 @@ export class MenuPage implements OnInit {
     quantityMap.set(ItemType.RICE, 1);
   }
 
-  ngOnInit() {
-  }
-  
   ionViewWillEnter() {
     this.isLoading = true;
+    this.setMealOptions();
     this.userService.setHeaderTitle(Page.MENU);
     this.userService.initCheckoutMap();
     this.initItemTypeMap();
     this.getAllMenu();
+  }
+
+  private setMealOptions() {
+    const date = new Date();
+    const disableTodayLunch = date.getHours() >= environment.lunchDisableTime;
+    const disableTodayDinner = date.getHours() >= environment.dinnerDisableTime;
+    this.mealOptions[0].isDisabled = disableTodayLunch;
+    this.mealOptions[1].isDisabled = disableTodayDinner;
+
+    if (disableTodayLunch && disableTodayDinner) {
+      this.selectedDay = 'TOMO';
+      this.dayOptions[0].isDisabled = true;
+    }
+
+    console.log(this.selectedDay, this.selectedMeal);
   }
 
   changeMeal(event: any) {
@@ -86,8 +111,10 @@ export class MenuPage implements OnInit {
 
   private createMenuMap(data: MenuWrapper[]) {
     data.forEach((menu: any) => {
+      menu.menu.isSet = menu.isSet;
       this.menuMap.set(menu.day.toString(), menu.menu);
     });
+    console.log(this.menuMap);
   }
 
   private initItemTypeMap() {
@@ -111,18 +138,32 @@ export class MenuPage implements OnInit {
   }
 
   proceedToCheckout() {
-    if(this.validateCheckoutMap()){
-      this.router.navigate(['./', 'checkout', this.selectedDay, this.selectedMeal]);
+    if (this.validateCheckoutMap()) {
+      this.router.navigate([
+        './',
+        'checkout',
+        this.selectedDay,
+        this.selectedMeal,
+      ]);
     }
   }
 
-  validateCheckoutMap() : boolean {
-    for (let [key, val] of  quantityMap.entries()) {
-      if(this.userService.checkoutMap.get(key)?.length != val) {
-        this.userService.presentToast('Please provide required quantity for ' + key);
+  validateCheckoutMap(): boolean {
+    for (let [key, val] of quantityMap.entries()) {
+      if (this.userService.checkoutMap.get(key)?.length != val) {
+        this.userService.presentToast(
+          'Please provide required quantity for ' + key
+        );
         return false;
       }
     }
     return true;
+  }
+
+  disableMeal(meal: any): boolean {
+    return (
+      (this.selectedDay === Day.TODAY && meal.isDisabled) ||
+      !this.menuMap.get(this.selectedDay + '_' + meal.value)?.isSet
+    );
   }
 }

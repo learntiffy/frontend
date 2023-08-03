@@ -112,8 +112,6 @@ export class CheckoutPage implements OnInit {
       this.userService.placeOrder(this.encryptedOrder).subscribe({
         next: (response) => {
           if (response.status == 201) {
-            console.log('if');
-            this.userService.presentToast('Order placed successfully!!!');
             this.userService.initCheckoutMap();
             this.router.navigate(['./', 'order-placed']);
             this.isLoading = false;
