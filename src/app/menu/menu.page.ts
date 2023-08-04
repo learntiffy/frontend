@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Day } from '../constants/Day';
 import { Meal } from '../constants/Meal';
 import { Item } from '../models/Item';
 import { ItemType } from '../models/ItemType';
@@ -8,8 +10,7 @@ import { Menu } from '../models/Menu';
 import { MenuWrapper } from '../models/MenuWrapper';
 import { Page } from '../models/Page';
 import { UserService } from '../services/user.service';
-import { environment } from 'src/environments/environment';
-import { Day } from '../constants/Day';
+import { MenuDay } from '../constants/MenuDay';
 
 const quantityMap = new Map<string, number>();
 @Component({
@@ -20,6 +21,7 @@ const quantityMap = new Map<string, number>();
 export class MenuPage {
   Meal = Meal;
   Day = Day;
+  MenuDay = MenuDay;
   selectedMeal = Meal.LUNCH;
   selectedDay = 'TODAY';
   menuMap = new Map<string, Menu>();
@@ -49,26 +51,10 @@ export class MenuPage {
 
   ionViewWillEnter() {
     this.isLoading = true;
-    this.setMealOptions();
     this.userService.setHeaderTitle(Page.MENU);
     this.userService.initCheckoutMap();
     this.initItemTypeMap();
     this.getAllMenu();
-  }
-
-  private setMealOptions() {
-    const date = new Date();
-    const disableTodayLunch = date.getHours() >= environment.lunchDisableTime;
-    const disableTodayDinner = date.getHours() >= environment.dinnerDisableTime;
-    this.mealOptions[0].isDisabled = disableTodayLunch;
-    this.mealOptions[1].isDisabled = disableTodayDinner;
-
-    if (disableTodayLunch && disableTodayDinner) {
-      this.selectedDay = 'TOMO';
-      this.dayOptions[0].isDisabled = true;
-    }
-
-    console.log(this.selectedDay, this.selectedMeal);
   }
 
   changeMeal(event: any) {
@@ -111,10 +97,27 @@ export class MenuPage {
 
   private createMenuMap(data: MenuWrapper[]) {
     data.forEach((menu: any) => {
-      menu.menu.isSet = menu.isSet;
+      menu.menu.isDisabled = this.isMenuDisabled(menu);
       this.menuMap.set(menu.day.toString(), menu.menu);
     });
     console.log(this.menuMap);
+  }
+
+  isMenuDisabled(menu: any): boolean {
+    const date = new Date();
+    const disableTodayLunch = date.getHours() >= environment.lunchDisableTime;
+    const disableTodayDinner = date.getHours() >= environment.dinnerDisableTime;
+
+    switch (menu.day) {
+      case MenuDay.TODAY_LUNCH:
+        return disableTodayLunch || !menu.isSet;
+      case MenuDay.TODAY_DINNER:
+        return disableTodayDinner || !menu.isSet;
+      case MenuDay.TOMO_LUNCH:
+      case MenuDay.TOMO_DINNER:
+        return !menu.isSet;
+    }
+    return false;
   }
 
   private initItemTypeMap() {
@@ -158,12 +161,5 @@ export class MenuPage {
       }
     }
     return true;
-  }
-
-  disableMeal(meal: any): boolean {
-    return (
-      (this.selectedDay === Day.TODAY && meal.isDisabled) ||
-      !this.menuMap.get(this.selectedDay + '_' + meal.value)?.isSet
-    );
   }
 }

@@ -54,5 +54,6 @@ export class AuthService {
 
   public setIsLoggedIn() {
     this.isLoggedIn = true;
+    this.loginStatus.emit(true);
   }
 }

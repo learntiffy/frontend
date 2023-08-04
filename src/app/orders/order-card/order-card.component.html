@@ -84,7 +84,7 @@
   <ion-grid class="ion-no-padding">
     <ion-row class="ion-justify-content-center">
       <ion-col size="12" size-md="6" class="ion-align-items-center">
-        <ion-button id="open-modal" expand="block" fill="clear" (click)="showFeedbackModal = true">
+        <ion-button id="open-modal" expand="block" fill="clear" (click)="rateFood(order._id)">
           <u class="font-primary">
             Rate food
           </u>
@@ -95,5 +95,5 @@
 
 </ion-card>
 
-<app-feedback-modal *ngIf="showFeedbackModal" [isModalOpen]="showFeedbackModal"
-  (close)="showFeedbackModal = false"></app-feedback-modal>
+<app-feedback-modal [orderId]="selectedOrderId" [isModalOpen]="showFeedbackModal" (close)="showFeedbackModal = false"
+  *ngIf="showFeedbackModal"></app-feedback-modal>

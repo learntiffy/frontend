@@ -23,8 +23,7 @@ export class UserAuthGuard {
       return false;
     }
     // logged in, so return true
-    this.authService.isLoggedIn = true;
-    this.authService.loginStatus.emit(true);
+    this.authService.setIsLoggedIn();
     return true;
   }
 }

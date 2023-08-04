@@ -26,12 +26,12 @@
                     <app-rating [(rating)]="rating"></app-rating>
                   </ion-item>
                   <ion-item>
-                    <ion-textarea label="Comment" labelPlacement="floating"
-                      placeholder="Please give additional comments"></ion-textarea>
+                    <ion-textarea id="comment" name="comment" label=" Comment" labelPlacement="floating"
+                      placeholder="Please give additional comments" [(ngModel)]="comment"></ion-textarea>
                   </ion-item>
                   <ion-row>
                     <ion-col>
-                      <ion-button type="submit" color="primary" expand="block" class="ion-margin-top"
+                      <ion-button type="button" color="primary" expand="block" class="ion-margin-top"
                         (click)="confirm()">
                         Submit
                       </ion-button>

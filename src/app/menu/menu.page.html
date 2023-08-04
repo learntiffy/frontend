@@ -3,7 +3,7 @@
     <ion-row class="ion-justify-content-center ion-margin-horizontal">
       <ion-col size-sm="12" size="12" size-md="10">
         <ion-segment [value]="Meal.LUNCH" mode="ios" (ionChange)="changeMeal($event)">
-          <ion-segment-button [value]="meal.value" [disabled]="disableMeal(meal)" *ngFor="let meal of mealOptions">
+          <ion-segment-button [value]="meal.value" *ngFor="let meal of mealOptions">
             <ion-label>{{ meal.label }}</ion-label>
           </ion-segment-button>
         </ion-segment>
@@ -21,8 +21,8 @@
         <ion-row class="ion-justify-content-end ion-padding-end">
           <ion-radio-group [allowEmptySelection]="false" [value]="selectedDay" class="ion-hide-sm-down ion-margin-end"
             (ionChange)="changeDay($event)">
-            <ion-radio [value]="day.value" [disabled]="day.isDisabled" labelPlacement="end"
-              [ngClass]="{'ion-margin-end': day.value === Day.TODAY}" *ngFor="let day of dayOptions">
+            <ion-radio [value]="day.value" labelPlacement="end" [ngClass]="{'ion-margin-end': day.value === Day.TODAY}"
+              *ngFor="let day of dayOptions">
               {{day.label}}
             </ion-radio>
           </ion-radio-group>
@@ -40,22 +40,40 @@
       </ion-col>
     </ion-row>
 
-    <app-menu-section [section]="'SABJI'" [items]="getItemsByType('SABJI')" [isLoading]="isLoading"
-      [menuChangedSubject]="menuChangedSubject.asObservable()"></app-menu-section>
+    <ion-row>
+      <ion-col class="ion-no-padding" *ngIf="currentMenu.isDisabled">
+        <ion-grid class="ion-no-padding">
+          <ion-row >
+            <ion-col size="12">
+              <img src="../../assets/images/Hidden.gif" alt="" srcset="">
+            </ion-col>
+            <ion-col size="12" class="ion-no-padding">
+              <h5 class="disable-meal-text">Either the time to order this menu has been elapsed or the menu has been
+                disabled.
+              </h5>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+      <ion-col *ngIf="!currentMenu.isDisabled">
+        <app-menu-section [section]="'SABJI'" [items]="getItemsByType('SABJI')" [isLoading]="isLoading"
+          [menuChangedSubject]="menuChangedSubject.asObservable()"></app-menu-section>
 
-    <app-menu-section [section]="'ROTI'" [items]="getItemsByType('ROTI')" [isLoading]="isLoading"
-      [menuChangedSubject]="menuChangedSubject.asObservable()"></app-menu-section>
+        <app-menu-section [section]="'ROTI'" [items]="getItemsByType('ROTI')" [isLoading]="isLoading"
+          [menuChangedSubject]="menuChangedSubject.asObservable()"></app-menu-section>
 
-    <app-menu-section [section]="'DAL'" [items]="getItemsByType('DAL')" [isLoading]="isLoading"
-      [menuChangedSubject]="menuChangedSubject.asObservable()"></app-menu-section>
+        <app-menu-section [section]="'DAL'" [items]="getItemsByType('DAL')" [isLoading]="isLoading"
+          [menuChangedSubject]="menuChangedSubject.asObservable()"></app-menu-section>
 
-    <app-menu-section [section]="'RICE'" [items]="getItemsByType('RICE')" [isLoading]="isLoading"
-      [menuChangedSubject]="menuChangedSubject.asObservable()"></app-menu-section>
+        <app-menu-section [section]="'RICE'" [items]="getItemsByType('RICE')" [isLoading]="isLoading"
+          [menuChangedSubject]="menuChangedSubject.asObservable()"></app-menu-section>
 
-    <app-menu-section [section]="'SPECIAL'" [items]="getItemsByType('SPECIAL')" [isLoading]="isLoading"
-      [menuChangedSubject]="menuChangedSubject.asObservable()"></app-menu-section>
+        <app-menu-section [section]="'SPECIAL'" [items]="getItemsByType('SPECIAL')" [isLoading]="isLoading"
+          [menuChangedSubject]="menuChangedSubject.asObservable()"></app-menu-section>
+      </ion-col>
+    </ion-row>
 
-    <ion-row class="ion-justify-content-center ion-margin-horizontal">
+    <ion-row class="ion-justify-content-center ion-margin-horizontal" *ngIf="!currentMenu.isDisabled">
       <ion-col size="12" size-md="6" class="ion-align-items-center">
         <ion-button expand="block" color="primary" class="ion-margin" (click)="proceedToCheckout()">
           Proceed

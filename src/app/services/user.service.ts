@@ -8,6 +8,7 @@ import { Address } from '../models/request/Address';
 import { Response } from '../models/response/Response';
 import { Item } from '../models/Item';
 import { ItemType } from '../models/ItemType';
+import { Feedback } from '../models/request/Feedback';
 
 const host = environment.api_url + 'user';
 
@@ -79,6 +80,10 @@ export class UserService {
 
   public getOrders(): Observable<Response> {
     return this.http.get<Response>(`${host}/getOrders`);
+  }
+
+  public submitFeedback(feedback: Feedback): Observable<Response> {
+    return this.http.post<Response>(`${host}/feedback`, { feedback: feedback });
   }
 
   async presentToast(msg: string, duration: number = 3000, route: string = '') {

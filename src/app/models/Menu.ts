@@ -4,5 +4,5 @@ export interface Menu {
   items: Item[];
   meal: string;
   name: string;
-  isSet: boolean;
+  isDisabled: boolean;
 }

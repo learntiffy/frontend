@@ -30,7 +30,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf="segment === 'past' && !isLoading" class="ion-justify-content-center">
+    <ion-row class="ion-justify-content-center" *ngIf="segment === 'past' && !isLoading">
       <ion-col size-xs="12" size-sm="12" size-md="10" size-lg="7" size-xl="7">
         <app-order-card [order]="order" *ngFor="let order of pastOrders"></app-order-card>
       </ion-col>
@@ -45,7 +45,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf="segment === 'today' && !isLoading" class="ion-justify-content-center">
+    <ion-row class="ion-justify-content-center" *ngIf="segment === 'today' && !isLoading">
       <ion-col size-xs="12" size-sm="12" size-md="10" size-lg="7" size-xl="7">
         <app-order-card [order]="order" *ngFor="let order of todayOrders"></app-order-card>
       </ion-col>
@@ -62,7 +62,7 @@
 
 
 
-    <ion-row *ngIf="segment === 'upcoming' && !isLoading">
+    <ion-row class="ion-justify-content-center" *ngIf="segment === 'upcoming' && !isLoading">
       <ion-col size-xs="12" size-sm="12" size-md="10" size-lg="7" size-xl="7">
         <app-order-card [order]="order" *ngFor="let order of upcomingOrders"></app-order-card>
       </ion-col>

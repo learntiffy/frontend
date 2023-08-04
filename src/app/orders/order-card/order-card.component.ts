@@ -12,6 +12,7 @@ export class OrderCardComponent implements OnInit {
   total = 0;
 
   showFeedbackModal = false;
+  selectedOrderId!: string;
 
   constructor() {}
 
@@ -27,6 +28,11 @@ export class OrderCardComponent implements OnInit {
   }
 
   openFeedbackModel() {
+    this.showFeedbackModal = true;
+  }
+
+  rateFood(orderId: string) {
+    this.selectedOrderId = orderId;
     this.showFeedbackModal = true;
   }
 }
