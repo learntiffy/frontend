@@ -21,6 +21,9 @@ export class OrdersPage implements OnInit {
   ngOnInit() {}
 
   ionViewWillEnter() {
+    this.pastOrders = [];
+    this.todayOrders = [];
+    this.upcomingOrders = [];
     this.getOrders();
     this.segment = 'today';
     this.userService.setHeaderTitle(Page.ORDERS);
