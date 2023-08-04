@@ -13,7 +13,7 @@ import { ItemType } from '../models/ItemType';
   templateUrl: './checkout.page.html',
   styleUrls: ['./checkout.page.scss'],
 })
-export class CheckoutPage implements OnInit {
+export class CheckoutPage {
   isLoading = true;
   isSubmitting = false;
   mealDay = '';
@@ -38,9 +38,8 @@ export class CheckoutPage implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {}
-
   ionViewWillEnter() {
+    this.isSubmitting = false;
     this.userService.setHeaderTitle(Page.CHECKOUT);
     this.mealDay = this.route.snapshot.paramMap.get('day') ?? '';
     this.mealType = this.route.snapshot.paramMap.get('meal') ?? '';
