@@ -56,4 +56,9 @@ export class AuthService {
     this.isLoggedIn = true;
     this.loginStatus.emit(true);
   }
+
+  public checkLoginStatus() {
+    const token = localStorage.getItem('token');
+    token ? this.setIsLoggedIn() : this.logout();
+  }
 }

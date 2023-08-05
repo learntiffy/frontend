@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from '../services/user.service';
+import { Component } from '@angular/core';
 import { Page } from '../models/Page';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-manage-address',
