@@ -23,7 +23,7 @@ const Pages = [
   {
     title: 'Manage Address',
     url: 'manage-address',
-    icon: 'book',
+    icon: 'map',
   },
   {
     title: 'Forum',
