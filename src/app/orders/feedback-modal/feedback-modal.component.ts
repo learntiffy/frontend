@@ -43,7 +43,6 @@ export class FeedbackModalComponent {
 
   submitFeedback() {
     const feedback = new Feedback(this.orderId, this.rating, this.comment);
-    console.log(feedback);
     this.userService.submitFeedback(feedback).subscribe({
       next: (res) => {
         if (res.status == 200) {

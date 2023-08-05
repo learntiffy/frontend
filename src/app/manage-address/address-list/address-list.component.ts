@@ -84,7 +84,6 @@ export class AddressListComponent implements OnInit {
     this.addressList = this.addressList.filter(
       (addr) => addr._id !== addressId
     );
-    console.log(this.addressList);
     if (this.defaultAddress._id == addressId) {
       this.defaultAddress = this.addressList[0];
     }

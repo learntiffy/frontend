@@ -100,7 +100,6 @@ export class MenuPage {
       menu.menu.isDisabled = this.isMenuDisabled(menu);
       this.menuMap.set(menu.day.toString(), menu.menu);
     });
-    console.log(this.menuMap);
   }
 
   isMenuDisabled(menu: any): boolean {

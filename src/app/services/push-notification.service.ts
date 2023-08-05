@@ -12,7 +12,6 @@ export class PushNotificationService {
   token = '';
 
   public initPush() {
-    console.log('initPush', Capacitor.getPlatform());
     if (Capacitor.getPlatform() !== 'web') {
       this.registerPush();
     }

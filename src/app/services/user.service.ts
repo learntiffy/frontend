@@ -56,7 +56,6 @@ export class UserService {
   }
 
   public getSubArea(areaId: string): Observable<Response> {
-    console.log(areaId);
     return this.http.get<Response>(`${host}/getSubArea?areaId=${areaId}`);
   }
 
@@ -103,7 +102,6 @@ export class UserService {
 
     if (route !== '') {
       await toast.onDidDismiss().then(() => {
-        console.log('dismissed');
         this.router.navigate(['./', route]);
       });
     }

@@ -76,10 +76,8 @@ export class EditAddressComponent implements OnInit {
   getArea(): void {
     this.userService.getArea().subscribe({
       next: (res) => {
-        console.log(res);
         if (res.status === 200) {
           this.areaList = res.data;
-          console.log(this.areaList);
           if (this.areaList && this.areaList.length > 0) {
             this.getSubArea(this.areaList[0]._id);
           }

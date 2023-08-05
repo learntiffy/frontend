@@ -22,12 +22,7 @@ export class AppComponent {
   ) {
     this.initilizeApp();
     this.pushNotificationService.initPush();
-    // this.router.events.subscribe((ev) => {
-    //   if (ev instanceof NavigationEnd) {
-    //     this.checkLoginStatus();
-    //   }
-    // });
-
+    this.checkLoginStatus();
     App.addListener('backButton', () => {
       this.location.back();
     });
