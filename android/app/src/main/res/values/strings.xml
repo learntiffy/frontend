@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">tiffy</string>
-    <string name="title_activity_main">tiffy</string>
-    <string name="package_name">com.tiffy.app</string>
-    <string name="custom_url_scheme">com.tiffy.app</string>
+    <string name="app_name">તાપૌસ્વા</string>
+    <string name="title_activity_main">તાપૌસ્વા</string>
+    <string name="package_name">com.તાપૌસ્વા.app</string>
+    <string name="custom_url_scheme">com.તાપૌસ્વા.app</string>
 </resources>
