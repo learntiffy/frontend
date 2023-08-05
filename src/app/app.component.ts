@@ -19,7 +19,8 @@ export class AppComponent {
     private authService: AuthService,
     private location: Location
   ) {
-    StatusBar.setStyle({style : Style.Light})
+    StatusBar.setStyle({ style: Style.Light });
+    StatusBar.setBackgroundColor({ color: '#f76a3c' });
     this.pushNotificationService.initPush();
     // this.router.events.subscribe((ev) => {
     //   if (ev instanceof NavigationEnd) {
