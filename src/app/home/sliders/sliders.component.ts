@@ -16,10 +16,8 @@ export class SlidersComponent implements OnInit {
 
   ngOnInit(): void {
     const imageSlider = document.getElementById('image-slider');
-    const iconSlider = document.getElementById('icon-slider');
     if (Capacitor.getPlatform() !== 'web') {
       imageSlider?.setAttribute('slides-per-view', '1');
-      iconSlider?.setAttribute('slides-per-view', '3');
     }
   }
 
@@ -32,19 +30,13 @@ export class SlidersComponent implements OnInit {
 
   private setSlidesPerViewOnBreakpoint() {
     const width = screen.width;
-    const iconSlidesPerView = width / 130;
     let imageSlidesPerView = 1;
-    const iconSlider = document.getElementById('icon-slider');
     const imageSlider = document.getElementById('image-slider');
 
     if (width > 1080) imageSlidesPerView = 3;
     else if (width > 796) imageSlidesPerView = 2;
 
-    iconSlider?.setAttribute('slides-per-view', iconSlidesPerView.toString());
     imageSlider?.setAttribute('slides-per-view', imageSlidesPerView.toString());
   }
 
-  onBreakpointChange(event: any) {
-    console.log(event);
-  }
 }
