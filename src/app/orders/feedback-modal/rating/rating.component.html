@@ -1,4 +1,4 @@
-<h1 class="ion-margin-horizontal">
+<h1 class="ion-margin-horizontal" [ngClass]="{'disabled': isDisabled}">
   <ion-icon name="star" [ngStyle]="{ color: getColor(num) }" (click)="rate(num)" *ngFor="let num of [1, 2, 3, 4, 5]">
   </ion-icon>
 </h1>
