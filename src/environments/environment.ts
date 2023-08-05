@@ -6,8 +6,8 @@ export const environment = {
   production: false,
   api_url: 'https://tiffy-backend-onex.onrender.com/',
   AES_SECRET: 'secret',
-  lunchDisableTime: 10,
-  dinnerDisableTime: 17,
+  lunchDisableTime: 12,
+  dinnerDisableTime: 19,
 };
 
 /*
