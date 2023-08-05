@@ -4,8 +4,8 @@
 }
 
 .ion-badge-padding {
-  margin-top: 5px;
-  padding: 5px 10px;
+  margin-top: 3px;
+  padding: 5px 17px;
   --ion-color-base: green !important;
   --color: white !important;
 }
@@ -23,4 +23,11 @@ ion-badge {
   &.warning {
     --background: #22d8ccfa !important;
   }
+}
+
+
+.date {
+  font-size: 11px;
+  margin-top: 7px;
+  font-weight: normal;
 }

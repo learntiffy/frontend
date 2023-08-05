@@ -35,8 +35,8 @@ export class AppComponent {
 
   initilizeApp() {
     if (Capacitor.getPlatform() !== 'web') {
-      StatusBar.setStyle({ style: Style.Light });
-      StatusBar.setBackgroundColor({ color: '#f76a3c' });
+      StatusBar.setStyle({ style: Style.Dark });
+      StatusBar.setBackgroundColor({ color: 'linear-gradient(90deg, hsla(15, 97%, 66%, 1) 12%, hsla(15, 92%, 60%, 1) 84%)' });
     }
   }
 

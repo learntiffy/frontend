@@ -1,7 +1,7 @@
 h1 {
   text-align: center;
-}
 
-h1.disabled {
-  font-size: 20px;
+  &.disabled {
+    font-size: 20px;
+  }
 }
