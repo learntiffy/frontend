@@ -7,6 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { IonModal } from '@ionic/angular';
+import { FeedbackEvent } from 'src/app/models/FeedbackEvent';
 import { Feedback } from 'src/app/models/request/Feedback';
 import { UserService } from 'src/app/services/user.service';
 
@@ -17,26 +18,27 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class FeedbackModalComponent {
   @ViewChild('modal', { static: false }) modal!: IonModal;
-  @Output() close = new EventEmitter<void>();
+  @Output() close = new EventEmitter<FeedbackEvent>();
   @Input() isModalOpen!: boolean;
   @Input() orderId!: string;
   rating = 5;
   comment = '';
+  isSubmitted = false;
 
   constructor(private userService: UserService) {}
 
   cancel() {
-    this.modal.dismiss(null, 'cancel');
-    this.close.emit();
+    this.closeModal();
   }
 
   confirm() {
+    this.isSubmitted = true;
     this.submitFeedback();
   }
 
   closeModal() {
-    this.modal.dismiss(this.comment, 'confirm');
-    this.close.emit();
+    this.modal.dismiss();
+    this.close.emit(new FeedbackEvent(this.isSubmitted, this.rating));
   }
 
   submitFeedback() {
@@ -56,7 +58,6 @@ export class FeedbackModalComponent {
   }
 
   onWillDismiss(event: Event) {
-    this.modal.dismiss(null, 'cancel');
-    this.close.emit();
+    this.closeModal();
   }
 }

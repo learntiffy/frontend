@@ -51,7 +51,7 @@
       </ion-row>
     </ion-grid>
 
-    <ion-accordion-group class="ion-margin-top ion-padding-horizontal">
+    <ion-accordion-group class="ion-margin-vertical ion-padding-horizontal">
       <ion-accordion value="first">
         <ion-item slot="header" color="light">
           <ion-label class="ion-text-sm-wrap">
@@ -81,19 +81,22 @@
       </ion-accordion>
     </ion-accordion-group>
   </ion-card-content>
-  <ion-grid class="ion-no-padding">
+  <ion-grid class="ion-no-padding" *ngIf="segment === 'past'">
     <ion-row class="ion-justify-content-center">
       <ion-col size="12" size-md="6" class="ion-align-items-center">
-        <ion-button id="open-modal" expand="block" fill="clear" (click)="rateFood(order._id)">
+        <app-rating [(rating)]="order.feedback.foodRating" [isDisabled]="true" [isRated]="true"
+          *ngIf="order.feedback"></app-rating>
+        <ion-button id="open-modal" expand="block" fill="clear" (click)="rateFood(order._id)" *ngIf="!order.feedback">
           <u class="font-primary">
             Rate food
           </u>
         </ion-button>
       </ion-col>
+
     </ion-row>
   </ion-grid>
 
 </ion-card>
 
-<app-feedback-modal [orderId]="selectedOrderId" [isModalOpen]="showFeedbackModal" (close)="showFeedbackModal = false"
+<app-feedback-modal [orderId]="selectedOrderId" [isModalOpen]="showFeedbackModal" (close)="closeModal($event)"
   *ngIf="showFeedbackModal"></app-feedback-modal>

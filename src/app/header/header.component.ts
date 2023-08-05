@@ -38,7 +38,7 @@ const Pages = [
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  title: string = 'Tiffy';
+  title: string = 'Tapauswa';
   activeIndex = 0;
   Pages = Pages;
   activePage = 'home';

@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.tiffy.app',
-  appName: 'Tapauswa',
+  appId: 'com.tapauswa.app',
+  appName: 'તાપૌસ્વા',
   webDir: 'www',
   server: {
     androidScheme: 'https'

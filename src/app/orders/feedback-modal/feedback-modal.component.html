@@ -1,6 +1,6 @@
 <ion-content class="ion-padding">
-  <ion-modal #modal [isOpen]="isModalOpen" [canDismiss]="true" (willDismiss)="onWillDismiss($event)"
-    class="ion-modal-auto-height">
+  <ion-modal #modal [isOpen]="isModalOpen" [canDismiss]="true" [breakpoints]="[0, .25, .5, 1]"
+    (willDismiss)="onWillDismiss($event)" class="ion-modal-auto-height">
     <ng-template>
       <ion-content>
         <ion-toolbar>
@@ -23,7 +23,7 @@
                 <form>
                   <ion-item lines="none" class="ion-margin-vertical">
                     <ion-label> Provide a rating : </ion-label>
-                    <app-rating [(rating)]="rating"></app-rating>
+                    <app-rating [(rating)]="rating" [isDisabled]="false"></app-rating>
                   </ion-item>
                   <ion-item>
                     <ion-textarea id="comment" name="comment" label=" Comment" labelPlacement="floating"

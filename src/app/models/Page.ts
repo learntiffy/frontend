@@ -1,5 +1,5 @@
 export enum Page {
-  TIFFY = 'Tiffy',
+  TIFFY = 'Tapauswa',
   HOME = 'Home',
   MENU = 'Menu',
   CHECKOUT = 'Checkout',
