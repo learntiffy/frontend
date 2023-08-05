@@ -4,6 +4,7 @@ import { App } from '@capacitor/app';
 import { register } from 'swiper/element/bundle';
 import { AuthService } from './services/auth.service';
 import { PushNotificationService } from './services/push-notification.service';
+import { StatusBar, Style } from '@capacitor/status-bar';
 
 register();
 
@@ -18,6 +19,7 @@ export class AppComponent {
     private authService: AuthService,
     private location: Location
   ) {
+    StatusBar.setStyle({style : Style.Light})
     this.pushNotificationService.initPush();
     // this.router.events.subscribe((ev) => {
     //   if (ev instanceof NavigationEnd) {
