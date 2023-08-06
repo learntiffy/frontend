@@ -1,9 +1,9 @@
-import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
-import Swiper from 'swiper';
-import { PushNotificationService } from '../services/push-notification.service';
+import { Component, OnInit } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
-import { UserService } from '../services/user.service';
 import { Page } from '../models/Page';
+import { AuthService } from '../services/auth.service';
+import { PushNotificationService } from '../services/push-notification.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -40,6 +40,7 @@ export class HomePage implements OnInit {
   ];
   constructor(
     private userService: UserService,
+    private authService: AuthService,
     private noti: PushNotificationService
   ) {}
 
@@ -51,6 +52,12 @@ export class HomePage implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.checkLoginStatus();
     this.userService.setHeaderTitle(Page.HOME);
+  }
+
+  public checkLoginStatus() {
+    const token = localStorage.getItem('token');
+    if (token) this.authService.setIsLoggedIn();
   }
 }

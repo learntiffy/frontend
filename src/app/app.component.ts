@@ -1,11 +1,11 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { App } from '@capacitor/app';
+import { Capacitor } from '@capacitor/core';
+import { StatusBar, Style } from '@capacitor/status-bar';
 import { register } from 'swiper/element/bundle';
 import { AuthService } from './services/auth.service';
 import { PushNotificationService } from './services/push-notification.service';
-import { StatusBar, Style } from '@capacitor/status-bar';
-import { Capacitor } from '@capacitor/core';
 
 register();
 
@@ -22,7 +22,7 @@ export class AppComponent {
   ) {
     this.initilizeApp();
     this.pushNotificationService.initPush();
-    this.checkLoginStatus();
+    this.authService.checkLoginStatus();
     App.addListener('backButton', () => {
       this.location.back();
     });
@@ -33,10 +33,5 @@ export class AppComponent {
       StatusBar.setStyle({ style: Style.Dark });
       StatusBar.setBackgroundColor({ color: '#fa774b' });
     }
-  }
-
-  checkLoginStatus() {
-    const token = localStorage.getItem('token');
-    token ? this.authService.setIsLoggedIn() : this.authService.logout();
   }
 }
