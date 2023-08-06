@@ -52,7 +52,12 @@ export class HomePage implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.checkLoginStatus();
     this.userService.setHeaderTitle(Page.HOME);
-    this.authService.checkLoginStatus();
+  }
+
+  public checkLoginStatus() {
+    const token = localStorage.getItem('token');
+    if (token) this.authService.setIsLoggedIn();
   }
 }
