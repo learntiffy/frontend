@@ -22,7 +22,7 @@ export class AppComponent {
   ) {
     this.initilizeApp();
     this.pushNotificationService.initPush();
-    this.authService.checkLoginStatus();
+    this.checkLoginStatus();
     App.addListener('backButton', () => {
       this.location.back();
     });
@@ -33,5 +33,9 @@ export class AppComponent {
       StatusBar.setStyle({ style: Style.Dark });
       StatusBar.setBackgroundColor({ color: '#fa774b' });
     }
+  }
+  checkLoginStatus() {
+     const token = localStorage.getItem('token');
+     if(token) this.authService.setIsLoggedIn();
   }
 }
