@@ -14,6 +14,7 @@ export class LoginPage {
   showOtpInput = false;
   showSpinner = false;
   otp: string = '';
+  isSubmitting = false;
 
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -31,6 +32,7 @@ export class LoginPage {
   }
 
   sendOTP() {
+    this.isSubmitting = true;
     this.authService.loginUser(this.form.value.email ?? '').subscribe({
       next: (response) => {
         if (response.status === 200) {

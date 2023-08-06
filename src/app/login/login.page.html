@@ -26,7 +26,7 @@
           <ion-row class="ion-margin-top">
             <ion-col size="12" size-sm="12" size-xs="12" class="ion-no-padding">
               <ion-button *ngIf="!showOtpInput" type="submit" color="primary" expand="block" class="ion-margin-bottom"
-                [disabled]="form.invalid">
+                [disabled]="form.invalid || isSubmitting">
                 Send OTP
               </ion-button>
             </ion-col>
