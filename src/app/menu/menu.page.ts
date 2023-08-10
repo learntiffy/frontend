@@ -125,6 +125,7 @@ export class MenuPage {
     this.itemTypeMap.set(ItemType.RICE, []);
     this.itemTypeMap.set(ItemType.ROTI, []);
     this.itemTypeMap.set(ItemType.SPECIAL, []);
+    this.itemTypeMap.set(ItemType.EXTRA, []);
   }
 
   private createItemTypeMap(currentMenu: Menu | undefined) {

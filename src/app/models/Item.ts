@@ -1,10 +1,11 @@
 export interface Item {
-    name: string,
-    price: number,
-    status: string,
-    type: string,
-    unit: string,
-    imageURL: string,
-    _id: string,
-    description: string
+  _id: string;
+  name: string;
+  description: string;
+  imageURL: string;
+  unit: string;
+  price: number;
+  showPrice: boolean;
+  type: string;
+  status: string;
 }

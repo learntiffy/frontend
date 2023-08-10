@@ -20,9 +20,11 @@ export class CheckoutPage {
   mealType = '';
   selectedAddress!: Address;
   items: Item[] = [];
+  extraSpecialItems: Item[] = [];
   additionalComment = '';
   encryptedOrder: any;
   total = 0;
+  mealTotal = 0;
 
   itemOrderMap = new Map<string, number>([
     [ItemType.SABJI, 1],
@@ -49,11 +51,20 @@ export class CheckoutPage {
     this.items = [];
     this.total = 0;
     this.userService.checkoutMap.forEach((val, key) => {
-      this.items.push(...val);
-      this.total += val.reduce((prev, curr) => {
-        return prev + curr.price;
-      }, 0);
+      if (key === 'SPECIAL' || key === 'EXTRA') {
+        this.extraSpecialItems.push(...val);
+        this.total += val.reduce((prev, curr) => {
+          return prev + curr.price;
+        }, 0);
+      } else {
+        this.items.push(...val);
+        this.mealTotal += val.reduce((prev, curr) => {
+          return prev + curr.price;
+        }, 0);
+      }
     });
+    this.total += this.mealTotal;
+
     console.log('ionViewEnter checkout', this.items);
   }
 

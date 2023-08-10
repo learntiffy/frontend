@@ -5,7 +5,7 @@
         <app-address-list [showSpinner]="false" (onAddressChange)="setAddress($event)"></app-address-list>
       </ion-col>
       <ion-col>
-        <app-cart [items]="items" [total]="total"></app-cart>
+        <app-cart [items]="items" [extraSpecialItems]="extraSpecialItems" [mealTotal]="mealTotal" [total]="total"></app-cart>
         <ion-grid>
 
           <ion-row class="ion-margin-horizontal" *ngIf="items.length > 0">
@@ -18,12 +18,13 @@
           </ion-row>
 
           <ion-row class="ion-justify-content-center ion-margin-horizontal ion-margin-top" *ngIf="items.length > 0">
+            <!-- TODO: ADD COUPON FEATURE
             <ion-col size="12">
               <ion-text>Available coupons 16.</ion-text>
               <ion-checkbox labelPlacement="end" class="checkbox-tiffy ion-float-end">
                 Avail coupon
               </ion-checkbox>
-            </ion-col>
+            </ion-col> -->
             <ion-col size="12" size-md="6" class="ion-align-items-center">
               <ion-button expand="block" color="primary" class="ion-margin" (click)="placeOrder()"
                 [disabled]="isSubmitting || !selectedAddress || items.length === 0">

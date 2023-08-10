@@ -3,16 +3,9 @@
     <ion-list>
       <ion-item lines="none">
         <ion-thumbnail slot="end">
-          <img
-            alt="Silhouette of mountains"
-            [src]="item?.imageURL"
-          />
-          <ion-chip
-            color="light"
-            class="d-flex justify-content-center"
-            [ngClass]="{addButton: !added, removeButton: added}"
-            (click)="onItemAddRemove(item)"
-          >
+          <img alt="Silhouette of mountains" [src]="item?.imageURL" />
+          <ion-chip color="light" class="d-flex justify-content-center"
+            [ngClass]="{addButton: !added, removeButton: added}" (click)="onItemAddRemove(item)">
             <ion-label color="dark" *ngIf="!added">
               <b>
                 Add
@@ -37,7 +30,8 @@
                 </h2>
               </ion-row>
               <ion-row>
-                <h3 class="padding-bottom-10">&#x20B9; {{item?.price}}  - {{item?.unit}}</h3>
+                <h3 class="padding-bottom-10" *ngIf="item.showPrice">&#x20B9; {{item?.price}} - {{item?.unit}}</h3>
+                <h3 class="padding-bottom-10" *ngIf="!item.showPrice">{{item?.unit}}</h3>
               </ion-row>
             </ion-col>
             <ion-col size="4" size-sm="1"></ion-col>

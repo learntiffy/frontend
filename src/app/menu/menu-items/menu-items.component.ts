@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Item } from 'src/app/models/Item';
+import { ItemType } from 'src/app/models/ItemType';
 
 @Component({
   selector: 'app-menu-items',
@@ -7,19 +8,21 @@ import { Item } from 'src/app/models/Item';
   styleUrls: ['./menu-items.component.scss'],
 })
 export class MenuItemsComponent implements OnInit {
-
-  @Input() item?: Item;
+  @Input() item!: Item;
   @Input() added?: boolean = false;
 
-  @Output() onItemAdded = new EventEmitter<{item: Item, flag: boolean | undefined}>();
+  @Output() onItemAdded = new EventEmitter<{
+    item: Item;
+    flag: boolean | undefined;
+  }>();
 
-  constructor() {}
+  ngOnInit() {
+    this.item.showPrice = ['SPECIAL', 'EXTRA'].includes(this.item.type);
+  }
 
-  ngOnInit() {}
-
-  public onItemAddRemove(item : Item | undefined) {
-    if(item){
-      this.onItemAdded.next({item: item, flag: this.added});
+  public onItemAddRemove(item: Item | undefined) {
+    if (item) {
+      this.onItemAdded.next({ item: item, flag: this.added });
     }
   }
 }

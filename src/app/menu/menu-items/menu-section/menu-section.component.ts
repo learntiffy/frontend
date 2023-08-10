@@ -51,7 +51,7 @@ export class MenuSectionComponent implements OnInit, OnDestroy, OnChanges {
 
     //remove
     if (flag) {
-      if (item.type === 'SPECIAL') {
+      if (item.type === 'SPECIAL' || item.type === 'EXTRA') {
         this.selectedItems = this.selectedItems.filter(
           (i) => i._id !== item._id
         );
@@ -74,7 +74,7 @@ export class MenuSectionComponent implements OnInit, OnDestroy, OnChanges {
     }
     //add
     else {
-      if (item.type === 'SPECIAL') {
+      if (item.type === 'SPECIAL'  || item.type === 'EXTRA') {
         this.selectedItems.push(item);
       } else if (this.selectedItems.length < this.requiredQuantity) {
         this.selectedItems.push(item);

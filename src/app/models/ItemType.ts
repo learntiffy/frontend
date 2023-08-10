@@ -1,7 +1,8 @@
 export enum ItemType {
-    SABJI = 'SABJI',
-    ROTI = 'ROTI',
-    DAL = 'DAL',
-    RICE = 'RICE',
-    SPECIAL = 'SPECIAL'
+  SABJI = 'SABJI',
+  ROTI = 'ROTI',
+  DAL = 'DAL',
+  RICE = 'RICE',
+  SPECIAL = 'SPECIAL',
+  EXTRA = 'EXTRA',
 }

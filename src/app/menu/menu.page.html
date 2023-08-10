@@ -70,6 +70,9 @@
 
         <app-menu-section [section]="'SPECIAL'" [items]="getItemsByType('SPECIAL')" [isLoading]="isLoading"
           [menuChangedSubject]="menuChangedSubject.asObservable()"></app-menu-section>
+
+        <app-menu-section [section]="'EXTRA'" [items]="getItemsByType('EXTRA')" [isLoading]="isLoading"
+          [menuChangedSubject]="menuChangedSubject.asObservable()"></app-menu-section>
       </ion-col>
     </ion-row>
 

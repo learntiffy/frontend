@@ -23,8 +23,9 @@ export class AppComponent {
     this.initilizeApp();
     this.pushNotificationService.initPush();
     this.checkLoginStatus();
-    App.addListener('backButton', () => {
-      this.location.back();
+    App.addListener('backButton', (data) => {
+      if (data.canGoBack) this.location.back();
+      else App.exitApp();
     });
   }
 
@@ -35,7 +36,7 @@ export class AppComponent {
     }
   }
   checkLoginStatus() {
-     const token = localStorage.getItem('token');
-     if(token) this.authService.setIsLoggedIn();
+    const token = localStorage.getItem('token');
+    if (token) this.authService.setIsLoggedIn();
   }
 }

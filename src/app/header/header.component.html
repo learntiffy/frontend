@@ -1,5 +1,5 @@
 <ion-app>
-  <ion-menu contentId="main-content" color="primary">
+  <ion-menu side="end" contentId="main-content" color="primary">
     <ion-header color="primary">
       <ion-toolbar color="primary">
         <ion-title color="light">Tapauswa</ion-title>
@@ -30,12 +30,12 @@
     <ion-header>
       <ion-toolbar color="primary">
         <ion-buttons slot="start">
-          <ion-menu-button color="light"></ion-menu-button>
+          <img role="button" alt="Silhouette of mountains" src="../../assets/images/logo.png" width="70" class="ms-2"
+            (click)="navigatePage('home')" />
         </ion-buttons>
-        <ion-title color="light">{{title}}</ion-title>
+        <ion-title color="light" mode="ios">{{title}}</ion-title>
         <ion-buttons slot="end">
-          <img alt="Silhouette of mountains" src="../../assets/images/logo.png" width="70" class="ion-float-end" (click)="navigatePage('home')"/>
-          <!-- <ion-menu-button color="light"></ion-menu-button> -->
+          <ion-menu-button color="light"></ion-menu-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>

@@ -1,6 +1,6 @@
 <ion-card>
   <ion-card-header class="ion-align-items-center">
-    <ion-card-title> 
+    <ion-card-title>
       <ion-segment value="default" mode="md">
         <ion-segment-button value="default">
           <ion-label>
@@ -12,7 +12,7 @@
   </ion-card-header>
   <ion-card-content class="ion-no-padding">
     <ion-list [inset]="true">
-      <ion-item *ngIf="items.length == 0" class="text-center">
+      <ion-item *ngIf="items.length === 0" class="text-center">
         <ion-text>
           <h1>
             Please add some items to place an order.
@@ -29,11 +29,36 @@
               <br>
               <small>({{ item.unit }})</small></ion-text>
           </ion-label>
-          <ion-text class="ion-float-end">&#8377; {{item.price}}</ion-text>
+          <ion-text class="ion-float-end" *ngIf="item.showPrice">&#8377; {{item.price}}</ion-text>
+          <ion-text class="ion-float-end" *ngIf="!item.showPrice">--</ion-text>
+        </ion-item>
+      </div>
+      <ion-item lines="none">
+        <ion-label class="ion-no-margin" *ngIf="items.length > 0">
+          <ion-text>
+            <h2 class="ion-float-start">Meal price</h2>
+          </ion-text>
+          <ion-text class="ion-float-end">
+            <h2>&#8377; {{mealTotal}}</h2>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+      <div *ngIf="extraSpecialItems.length > 0" class="border-bottom">
+        <ion-item *ngFor="let item of extraSpecialItems" class="marginBottom_25">
+          <ion-avatar slot="start">
+            <img alt="Item Image" [src]="item.imageURL" />
+          </ion-avatar>
+          <ion-label>
+            {{ item.name }} <ion-text color="medium">
+              <br>
+              <small>({{ item.unit }})</small></ion-text>
+          </ion-label>
+          <ion-text class="ion-float-end" *ngIf="item.showPrice">&#8377; {{item.price}}</ion-text>
+          <ion-text class="ion-float-end" *ngIf="!item.showPrice">&#8377; {{item.price}}</ion-text>
         </ion-item>
       </div>
       <br>
-      <ion-item *ngIf="items.length > 0">
+      <ion-item *ngIf="extraSpecialItems.length > 0">
         <ion-label>
           <ion-text color="primary">
             <h1 class="ion-float-start font-primary">Total</h1>
