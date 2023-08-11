@@ -35,6 +35,11 @@
                 [disabled]="form.invalid" (click)="verifyOTP()">
                 Verify OTP
               </ion-button>
+              <ion-text class="text-center">
+                <h6 class="ion-no-margin" *ngIf="showOtpInput">
+                  Go back to <a (click)="showOtpInput = false; isSubmitting = false"> Login </a>
+                </h6>
+              </ion-text>
             </ion-col>
           </ion-row>
           <ion-row *ngIf="!showOtpInput">

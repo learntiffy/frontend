@@ -69,13 +69,33 @@
           </ion-label>
         </ion-item>
         <div class="ion-padding" slot="content">
-          <div *ngFor="let item of order.items; let i = index">
-            <ion-item *ngIf="i < order.items.length - 1">
+
+          <div *ngFor="let item of mealItems; let i = index">
+            <ion-item *ngIf="i < mealItems.length - 1">
+              <ion-label>{{ item.name | titlecase }}</ion-label>
+              <ion-text slot="end"> -- </ion-text>
+            </ion-item>
+
+            <ion-item lines="none" *ngIf="i === mealItems.length - 1 && extraSpecialItems.length == 0">
+              <ion-label>{{ item.name | titlecase }}</ion-label>
+              <ion-text slot="end"> -- </ion-text>
+            </ion-item>
+          </div>
+
+          <hr />
+
+          <ion-item lines="none">
+            <ion-text> <b>Meal price</b> </ion-text>
+            <ion-text slot="end"> <b>&#8377; {{ mealTotal }} </b></ion-text>
+          </ion-item>
+
+          <div *ngFor="let item of extraSpecialItems; let i = index">
+            <ion-item *ngIf="i < extraSpecialItems.length - 1">
               <ion-label>{{ item.name | titlecase }}</ion-label>
               <ion-text slot="end"> &#8377; {{ item.price }} </ion-text>
             </ion-item>
 
-            <ion-item lines="none" *ngIf="i === order.items.length - 1">
+            <ion-item lines="none" *ngIf="i === extraSpecialItems.length - 1">
               <ion-label>{{ item.name | titlecase }}</ion-label>
               <ion-text slot="end"> &#8377; {{ item.price }} </ion-text>
             </ion-item>
@@ -84,8 +104,8 @@
           <hr />
 
           <ion-item lines="none">
-            <ion-text> Total </ion-text>
-            <ion-text slot="end"> &#8377; {{ total }} </ion-text>
+            <ion-text> <b>Total</b> </ion-text>
+            <ion-text slot="end"> <b>&#8377; {{ total }} </b></ion-text>
           </ion-item>
         </div>
       </ion-accordion>

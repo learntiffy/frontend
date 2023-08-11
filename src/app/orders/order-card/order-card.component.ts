@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FeedbackEvent } from 'src/app/models/FeedbackEvent';
 import { Order } from 'src/app/models/Order';
+import { Item } from 'src/app/models/Item';
 
 @Component({
   selector: 'app-order-card',
@@ -11,7 +12,10 @@ export class OrderCardComponent implements OnInit {
   @Input() order!: Order;
   @Input() segment!: string;
   allItemsName = '';
+  mealTotal = 0;
   total = 0;
+  mealItems: Item[] = [];
+  extraSpecialItems: Item[] = [];
 
   showFeedbackModal = false;
   selectedOrderId!: string;
@@ -19,7 +23,15 @@ export class OrderCardComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
+    this.mealTotal = 0;
+    this.total = 0;
     this.order.items.forEach((item, i) => {
+      if (['SPECIAL', 'EXTRA'].includes(item.type)) {
+        this.extraSpecialItems.push(item);
+      } else {
+        this.mealItems.push(item);
+        this.mealTotal += item.price;
+      }
       this.total += item.price;
       if (i < this.order.items.length - 1) {
         this.allItemsName += item.name + ', ';

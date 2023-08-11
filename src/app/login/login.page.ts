@@ -27,7 +27,9 @@ export class LoginPage {
   ) {}
 
   ionViewWillEnter() {
+    console.log('entererer');
     this.showOtpInput = false;
+    this.isSubmitting = false;
     this.userService.setHeaderTitle(Page.LOGIN);
   }
 
@@ -38,8 +40,10 @@ export class LoginPage {
         if (response.status === 200) {
           this.showOtpInput = true;
         } else if (response.status === 401) {
+          this.isSubmitting = false;
           this.userService.presentToast(response.message);
         } else {
+          this.isSubmitting = false;
           this.userService.presentToast(response.message);
         }
       },

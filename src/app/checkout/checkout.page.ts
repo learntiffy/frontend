@@ -50,6 +50,7 @@ export class CheckoutPage {
     }, 2000);
     this.items = [];
     this.total = 0;
+    this.mealTotal = 0;
     this.userService.checkoutMap.forEach((val, key) => {
       if (key === 'SPECIAL' || key === 'EXTRA') {
         this.extraSpecialItems.push(...val);
