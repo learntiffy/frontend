@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Capacitor } from '@capacitor/core';
 import { Page } from '../models/Page';
 import { AuthService } from '../services/auth.service';
@@ -41,7 +42,8 @@ export class HomePage implements OnInit {
   constructor(
     private userService: UserService,
     private authService: AuthService,
-    private noti: PushNotificationService
+    private noti: PushNotificationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -54,6 +56,7 @@ export class HomePage implements OnInit {
   ionViewWillEnter() {
     this.checkLoginStatus();
     this.userService.setHeaderTitle(Page.HOME);
+    this.userService.isHomePageVisited = true;
   }
 
   public checkLoginStatus() {

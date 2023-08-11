@@ -19,15 +19,19 @@ const quantityMap = new Map<string, number>();
   styleUrls: ['./menu.page.scss'],
 })
 export class MenuPage {
+  menuChangedSubject = new Subject<void>();
   Meal = Meal;
   Day = Day;
   MenuDay = MenuDay;
+  isLoading = true;
   selectedMeal = Meal.LUNCH;
   selectedDay = 'TODAY';
   menuMap = new Map<string, Menu>();
   itemTypeMap = new Map<string, Item[]>();
   checkOutMap = new Map<string, Item[]>();
   currentMenu?: Menu;
+  lunchDeliveryTimeElapsed = false;
+  dinnerDeliveryTimeElapsed = false;
 
   mealOptions = [
     { isDisabled: false, value: Meal.LUNCH, label: 'Lunch' },
@@ -38,9 +42,7 @@ export class MenuPage {
     { isDisabled: false, value: Day.TOMO, label: 'Tomorrow' },
   ];
 
-  isLoading = true;
 
-  menuChangedSubject = new Subject<void>();
 
   constructor(private userService: UserService, private router: Router) {
     quantityMap.set(ItemType.SABJI, 2);
@@ -55,6 +57,7 @@ export class MenuPage {
     this.userService.initCheckoutMap();
     this.initItemTypeMap();
     this.getAllMenu();
+    this.isTimeElapsed();
   }
 
   changeMeal(event: any) {
@@ -97,26 +100,15 @@ export class MenuPage {
 
   private createMenuMap(data: MenuWrapper[]) {
     data.forEach((menu: any) => {
-      menu.menu.isDisabled = this.isMenuDisabled(menu);
+      menu.menu.isDisabled = !menu.isSet;
       this.menuMap.set(menu.day.toString(), menu.menu);
     });
   }
 
-  isMenuDisabled(menu: any): boolean {
+  isTimeElapsed() {
     const date = new Date();
-    const disableTodayLunch = date.getHours() >= environment.lunchDisableTime;
-    const disableTodayDinner = date.getHours() >= environment.dinnerDisableTime;
-
-    switch (menu.day) {
-      case MenuDay.TODAY_LUNCH:
-        return disableTodayLunch || !menu.isSet;
-      case MenuDay.TODAY_DINNER:
-        return disableTodayDinner || !menu.isSet;
-      case MenuDay.TOMO_LUNCH:
-      case MenuDay.TOMO_DINNER:
-        return !menu.isSet;
-    }
-    return false;
+    this.lunchDeliveryTimeElapsed = date.getHours() >= environment.lunchDisableTime;
+    this.dinnerDeliveryTimeElapsed = date.getHours() >= environment.dinnerDisableTime;
   }
 
   private initItemTypeMap() {

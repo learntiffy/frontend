@@ -16,6 +16,7 @@ const host = environment.api_url + 'user';
   providedIn: 'root',
 })
 export class UserService {
+  isHomePageVisited = false;
   title = new EventEmitter<string>();
   checkoutMap = new Map<string, Item[]>();
 

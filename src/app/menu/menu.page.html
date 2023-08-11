@@ -76,6 +76,14 @@
       </ion-col>
     </ion-row>
 
+    <ion-row
+      *ngIf="!currentMenu.isDisabled && selectedDay === 'TODAY' && ((lunchDeliveryTimeElapsed && selectedMeal === 'LUNCH')  || (dinnerDeliveryTimeElapsed && selectedMeal === 'DINNER'))">
+      <ion-col size="12" class="ion-no-padding">
+        <h5 class="disable-meal-text">Delivery time has been elapsed. You will have to pick up the order.
+        </h5>
+      </ion-col>
+    </ion-row>
+
     <ion-row class="ion-justify-content-center ion-margin-horizontal" *ngIf="!currentMenu.isDisabled">
       <ion-col size="12" size-md="6" class="ion-align-items-center">
         <ion-button expand="block" color="primary" class="ion-margin" (click)="proceedToCheckout()">
