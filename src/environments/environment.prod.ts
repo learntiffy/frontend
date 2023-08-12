@@ -4,4 +4,5 @@ export const environment = {
   AES_SECRET: 'secret',
   lunchDisableTime: 12,
   dinnerDisableTime: 19,
+  fileSize: 20
 };

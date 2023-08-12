@@ -4,22 +4,30 @@
       <ion-col size="12" class="d-flex justify-content-end ion-padding-end">
         <ion-button color="primary" (click)="showPostModal = true">Post</ion-button>
       </ion-col>
-      <ion-col size-sm="12" size-md="10" size-lg="9">
-        <ion-card *ngFor="let item of [1, 2, 3, 4, 5, 6, 7]">
+      <ion-col size-sm="12" size-md="10" size-lg="9" *ngIf="!isLoading">
+        <ion-card *ngFor="let post of posts" class="ion-margin-vertical">
           <ion-card-header>
-            <ion-card-title> Harshil Amreliya </ion-card-title>
-            <p class="ion-no-margin">{{date}}</p>
+            <ion-card-title class="text-center">
+              <b>{{post.user.firstName + ' ' + post.user.lastName}}</b>
+              <ion-text>
+                <h6 class="ion-no-margin text-center">{{post.postDate | date: 'medium'}}</h6>
+              </ion-text>
+            </ion-card-title>
           </ion-card-header>
           <ion-card-content>
             <ion-grid class="ion-no-padding">
               <ion-row>
-                <ion-col size="12">
-                  Here's a small text description for the card content. Nothing more, nothing less.
-                  Here's a small text description for the card content. Nothing more, nothing less.
+                <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" class="ion-margin-bottom">
+                  {{post.text}}
                 </ion-col>
-                <ion-col size="12" class="ion-align-items-baseline">
-                  <img src="https://ionicframework.com/docs/img/demos/card-media.png" alt="img" class="img" />
-                  <video src=""></video>
+                <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6"
+                  class="ion-align-items-baseline ion-padding-horizontal">
+                  <video controls *ngIf="post.url?.includes('.mp4'); else imgMedia">
+                    <source [src]="post.url" type="video/mp4">
+                  </video>
+                  <ng-template #imgMedia>
+                    <img [src]="post.url" alt="img" class="img" />
+                  </ng-template>
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -29,5 +37,7 @@
     </ion-row>
   </ion-grid>
 
-  <app-add-post (close)="showPostModal = false" *ngIf="showPostModal"></app-add-post>
+  <ion-spinner color="primary" mode="ios" *ngIf="isLoading"></ion-spinner>
+
+  <app-add-post (close)="closeModal($event)" *ngIf="showPostModal"></app-add-post>
 </ion-content>

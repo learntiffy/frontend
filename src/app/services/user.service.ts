@@ -86,6 +86,14 @@ export class UserService {
     return this.http.post<Response>(`${host}/feedback`, { feedback: feedback });
   }
 
+  public addPost(formData: FormData): Observable<Response> {
+    return this.http.post<Response>(`${host}/forum/posts/add`, formData);
+  }
+
+  public getPosts(): Observable<Response> {
+    return this.http.get<Response>(`${host}/forum/posts`);
+  }
+
   async presentToast(msg: string, duration: number = 3000, route: string = '') {
     const toast = await this.toastController.create({
       message: msg,

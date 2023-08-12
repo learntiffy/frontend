@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
 import { ForumPageRoutingModule } from './forum-routing.module';
 
-import { ForumPage } from './forum.page';
 import { AddPostComponent } from './add-post/add-post.component';
+import { ForumPage } from './forum.page';
 
 @NgModule({
   imports: [
@@ -15,7 +15,6 @@ import { AddPostComponent } from './add-post/add-post.component';
     FormsModule,
     IonicModule,
     ForumPageRoutingModule,
-    ReactiveFormsModule,
   ],
   declarations: [ForumPage, AddPostComponent],
 })
