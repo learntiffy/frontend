@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
           !this.userService.isHomePageVisited &&
           !event.url.includes('home')
         ) {
-          // this.router.navigate(['home']);
+          this.router.navigate(['home']);
           this.userService.isHomePageVisited = true;
         }
       }
