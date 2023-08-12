@@ -15,22 +15,24 @@
           </ion-buttons>
         </ion-toolbar>
         <div class="wrapper">
-          <ion-grid class="ion-padding-top">
+          <ion-grid class="ion-padding">
             <ion-row class="justify-content-center">
               <form (ngSubmit)="addPost()">
                 <ion-col size-sm="12" size="10">
-                  <div class="picker">
-                    <input type="file" id="file" name="file" accept="image/*, video/*" (change)="onFileSelect($event)">
+                  <div class="border border-primary">
+                    <input type="file" id="file" class="form-control form-control-lg" name="file"
+                      accept="image/*, video/*" (change)="onFileSelect($event)">
                   </div>
-                  <p class="text-danger" *ngIf="isFileLarge">File size exceeded.</p>
+                  <p class="text-danger" *ngIf="isFileLarge">File size must not exceed {{ maxFileSizeInMB }} MB.</p>
                 </ion-col>
                 <ion-col size-xs="12" size-sm="10" class="ion-padding-top">
-                  <ion-textarea name="comment" label="Comment" labelPlacement="floating" class="ion-padding-horizontal"
-                    [autoGrow​]="true" [rows​]="10" [spellcheck]="true" [counter]="true" maxlength="255"
+                  <ion-textarea name="comment" label="Comment" labelPlacement="floating" [autoGrow]="true"
+                    [spellcheck]="true" [counter]="true" maxlength="255" [required]="true"
                     [(ngModel)]="comment"></ion-textarea>
                 </ion-col>
                 <ion-col size-xs="12" size-sm="10" class="ion-padding-horizontal">
-                  <ion-button type="submit" color="primary" expand="block" class="ion-margin-top">
+                  <ion-button type="submit" color="primary" expand="block" class="ion-margin-top"
+                    [disabled]="isBuffering || isFileLarge || comment.trim().length === 0">
                     Post
                   </ion-button>
                 </ion-col>

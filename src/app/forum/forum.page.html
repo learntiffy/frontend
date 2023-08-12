@@ -5,32 +5,29 @@
         <ion-button color="primary" (click)="showPostModal = true">Post</ion-button>
       </ion-col>
       <ion-col size-sm="12" size-md="10" size-lg="9" *ngIf="!isLoading">
-        <ion-card *ngFor="let post of posts" class="ion-margin-vertical">
+        <ion-card *ngFor="let post of posts" class="my-4">
           <ion-card-header>
-            <ion-card-title class="text-center">
-              <b>{{post.user.firstName + ' ' + post.user.lastName}}</b>
+            <ion-card-title>
+              <h1 class="ion-no-margin"><b>{{post.user.firstName + ' ' + post.user.lastName}}</b></h1>
               <ion-text>
-                <h6 class="ion-no-margin text-center">{{post.postDate | date: 'medium'}}</h6>
+                <h6 class="ion-no-margin ">{{post.postDate | date: 'MMM d, y, h:mm a'}}</h6>
               </ion-text>
             </ion-card-title>
           </ion-card-header>
-          <ion-card-content>
-            <ion-grid class="ion-no-padding">
-              <ion-row>
-                <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" class="ion-margin-bottom">
-                  {{post.text}}
-                </ion-col>
-                <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6"
-                  class="ion-align-items-baseline ion-padding-horizontal">
-                  <video controls *ngIf="post.url?.includes('.mp4'); else imgMedia">
-                    <source [src]="post.url" type="video/mp4">
-                  </video>
-                  <ng-template #imgMedia>
-                    <img [src]="post.url" alt="img" class="img" />
-                  </ng-template>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
+          <ion-card-content class="ion-padding-top">
+            <div class="row">
+              <div class="col-12 col-md-6 mb-3" [ngClass]="{'col-md-12' : !post.url}">
+                {{post.text}}
+              </div>
+              <div class="col-12 col-md-6" *ngIf="post.url">
+                <video controls *ngIf="post.url?.includes('.mp4'); else imgMedia">
+                  <source [src]="post.url" type="video/mp4">
+                </video>
+                <ng-template #imgMedia>
+                  <img [src]="post.url" alt="img" class="img" />
+                </ng-template>
+              </div>
+            </div>
           </ion-card-content>
         </ion-card>
       </ion-col>
