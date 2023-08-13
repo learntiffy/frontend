@@ -1,5 +1,5 @@
 img {
-  height: 200px;
+  height: 100%;
   width: 100%;
   max-width: 450px;
   text-align: center;
@@ -10,4 +10,8 @@ video {
   width: 100%;
   max-width: 450px;
   text-align: center;
+}
+
+.text-sm {
+  font-size: 12px;
 }

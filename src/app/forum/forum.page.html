@@ -8,10 +8,10 @@
         <ion-card *ngFor="let post of posts" class="my-4">
           <ion-card-header>
             <ion-card-title>
-              <h1 class="ion-no-margin"><b>{{post.user.firstName + ' ' + post.user.lastName}}</b></h1>
-              <ion-text>
-                <h6 class="ion-no-margin ">{{post.postDate | date: 'MMM d, y, h:mm a'}}</h6>
-              </ion-text>
+              <h3 class="ion-no-margin"><b>{{post.user.firstName + ' ' + post.user.lastName}}</b></h3>
+              <!-- <ion-text> -->
+                <p class="ion-no-margin text-secondary text-sm">{{post.postDate | date: 'MMM d, y, h:mm a'}}</p>
+              <!-- </ion-text> -->
             </ion-card-title>
           </ion-card-header>
           <ion-card-content class="ion-padding-top">
