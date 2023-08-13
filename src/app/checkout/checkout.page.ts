@@ -49,6 +49,7 @@ export class CheckoutPage {
       this.isLoading = false;
     }, 2000);
     this.items = [];
+    this.extraSpecialItems = [];
     this.total = 0;
     this.mealTotal = 0;
     this.userService.checkoutMap.forEach((val, key) => {
