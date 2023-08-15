@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true" class="ion-padding">
   <ion-grid *ngIf="!isLoading">
     <ion-row class="ion-justify-content-center ion-margin-horizontal">
-      <ion-col size-sm="12" size="12" size-md="10">
+      <ion-col size-xs="12" size-sm="12" size-md="10" size-lg="8" size-xl="8">
         <ion-segment [value]="Meal.LUNCH" mode="ios" (ionChange)="changeMeal($event)">
           <ion-segment-button [value]="meal.value" *ngFor="let meal of mealOptions">
             <ion-label>{{ meal.label }}</ion-label>
@@ -40,7 +40,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-row>
+    <ion-row class="ion-justify-content-center">
       <ion-col class="ion-no-padding" *ngIf="currentMenu.isDisabled">
         <ion-grid class="ion-no-padding">
           <ion-row>
@@ -55,7 +55,7 @@
           </ion-row>
         </ion-grid>
       </ion-col>
-      <ion-col *ngIf="!currentMenu.isDisabled">
+      <ion-col size-xs="12" size-sm="12" size-md="10" size-lg="8" size-xl="8" *ngIf="!currentMenu.isDisabled">
         <app-menu-section [section]="'SABJI'" [items]="getItemsByType('SABJI')" [isLoading]="isLoading"
           [menuChangedSubject]="menuChangedSubject.asObservable()"></app-menu-section>
 

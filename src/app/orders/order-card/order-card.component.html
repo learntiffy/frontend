@@ -76,28 +76,21 @@
               <ion-text slot="end"> -- </ion-text>
             </ion-item>
 
-            <ion-item lines="none" *ngIf="i === mealItems.length - 1">
+            <ion-item *ngIf="i === mealItems.length - 1">
               <ion-label>{{ item.name | titlecase }}</ion-label>
               <ion-text slot="end"> -- </ion-text>
             </ion-item>
           </div>
 
-          <hr />
-
-          <ion-item lines="none">
-            <ion-text> <b>Meal price</b> </ion-text>
-            <ion-text slot="end"> <b>&#8377; {{ mealTotal }} </b></ion-text>
-          </ion-item>
-
           <div *ngFor="let item of extraSpecialItems; let i = index">
             <ion-item *ngIf="i < extraSpecialItems.length - 1">
               <ion-label>{{ item.name | titlecase }}</ion-label>
-              <ion-text slot="end"> &#8377; {{ item.price }} </ion-text>
+              <ion-text slot="end"> -- </ion-text>
             </ion-item>
 
             <ion-item lines="none" *ngIf="i === extraSpecialItems.length - 1">
               <ion-label>{{ item.name | titlecase }}</ion-label>
-              <ion-text slot="end"> &#8377; {{ item.price }} </ion-text>
+              <ion-text slot="end"> -- </ion-text>
             </ion-item>
           </div>
 
