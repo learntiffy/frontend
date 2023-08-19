@@ -12,7 +12,6 @@ export class OrderCardComponent implements OnInit {
   @Input() order!: Order;
   @Input() segment!: string;
   allItemsName = '';
-  mealTotal = 0;
   total = 0;
   mealItems: Item[] = [];
   extraSpecialItems: Item[] = [];
@@ -23,16 +22,13 @@ export class OrderCardComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.mealTotal = 0;
-    this.total = 0;
+    this.total = this.order.amount;
     this.order.items.forEach((item, i) => {
       if (['SPECIAL', 'EXTRA'].includes(item.type)) {
         this.extraSpecialItems.push(item);
       } else {
         this.mealItems.push(item);
-        this.mealTotal += item.price;
       }
-      this.total += item.price;
       if (i < this.order.items.length - 1) {
         this.allItemsName += item.name + ', ';
       } else {
